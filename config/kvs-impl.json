@@ -3,7 +3,7 @@
     "name": "KVS",
     "type": "ap",
     "eap": "KVS-IMPL.eap",
-    "diagram": "MijnApplicatieprofiel",
+    "diagram": "Klantvolgsysteem",
     "template": "KVS-impl.j2",
     "title": "Implementatiemodel Klant Volg Systeem",
     "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
