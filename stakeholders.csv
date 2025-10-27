@@ -1,4 +1,3 @@
-Voornaam;Naam;Affiliatie;E-mail;Website;MijnKolom;
-AuteurVoornaam;AuteurNaam;AuteurAffiliatie;auteurvoornaam.auteurnaam@auteurdomein;https://auteurwebsiteurl;A;
-EditorVoornaam;EditorNaam;EditorAffiliatie;editorvoornaam.editornaam@editordomein;https://editorwebsiteurl;E;
-MedewerkerVoornaam;MedewerkerNaam;MedewerkerAffiliatie;medewerkervoornaam.medewerkernaam@medewerkerdomein;https://medewerkerwebsiteurl;C;
+Voornaam;Naam;Affiliatie;E-mail;Website;Rol;
+Geert; Thijs;Digitaal Vlaanderen; geert.thijs@vlaanderen.be;https://data.vlaanderen.be/id/organisatie/OVO002949;E;
+Dylan; Van Assche;Digitaal Vlaanderen; dylan.vanassche@vlaanderen.be;https://data.vlaanderen.be/id/organisatie/OVO002949;E;
