@@ -2,19 +2,24 @@
   "@context": [
     "https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem/ontwerpstandaard/2025-10-27/context/KVS.jsonld"
   ],
-  "@type": [
-    "Traject",
-    "Activeringstraject",
-    "Output"
-  ],
-  "Traject.startdatum": {
-    "@value": "2024-10-15",
-    "@type": "Date"
-  },
-  "Traject.status": {
-    "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Actief"
-  },
-  "Traject.trajecttype": {
-    "@id": "https://data.vlaanderen.be/id/concept/TrajectType/ActiveringNaarWerk"
-  }
+  "@graph": [
+    {
+      "@id": "http://example.com/id/traject/001",
+      "@type": [
+        "Traject",
+        "Activeringstraject",
+        "Output"
+      ],
+      "Traject.startdatum": {
+        "@value": "2024-10-15",
+        "@type": "Date"
+      },
+      "Traject.status": {
+        "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Actief"
+      },
+      "Traject.trajecttype": {
+        "@id": "https://data.vlaanderen.be/id/concept/TrajectType/ActiveringNaarWerk"
+      }
+    }
+  ]
 }
