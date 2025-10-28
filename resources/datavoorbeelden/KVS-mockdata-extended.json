@@ -47,8 +47,8 @@
       "Persoon.heeftGeboorte": {
         "@type": "Geboorte",
         "Geboorte.datum": { "@value": "1977-05-18", "@type": "DateTime" },
-        "Geboorte.land": { "@type": "Plaats", "Plaats.naam": "België" },
-        "Geboorte.plaats": { "@type": "Plaats", "Plaats.naam": "Antwerpen" }
+        "Geboorte.land": { "@type": "Plaats", "Plaats.plaatsnaam": "België" },
+        "Geboorte.plaats": { "@type": "Plaats", "Plaats.plaatsnaam": "Antwerpen" }
       },
       "Persoon.heeftRelatieMet": {
         "@type": "Gezinsrelatie",
@@ -272,7 +272,7 @@
               "@type": "Stuk",
               "Stuk.naam": { "@value": "Diploma Nederlands", "@language": "nl" },
               "Stuk.datum": [
-                  { "@value": "2025-10-27", "@type": "XSD.DateTime" }
+                  { "@value": "2025-10-27", "@type": "DateTime" }
               ]
             }
           ]
