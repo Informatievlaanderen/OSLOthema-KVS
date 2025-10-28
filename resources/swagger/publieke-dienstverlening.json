@@ -1,0 +1,75 @@
+{
+  "@context": [
+    "https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem/ontwerpstandaard/2025-10-27/context/KVS.jsonld",
+    {
+      "schema": "https://schema.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    }
+   ],
+   "@graph": [
+    {
+      "@id": "http://example.com/id/dienstverlening/001",
+      "@type": "PubliekeDienstverlening",
+      "PubliekeDienstverlening.heeftVerantwoordelijke": {
+        "@id": "https://data.vlaanderen.be/id/organisatie/OVO000078"
+      },
+      "PubliekeDienstverlening.naam": {
+        "@value": "Tewerkstellingsdienst van Vlaanderen",
+        "@language": "nl"
+      },
+      "PubliekeDienstverlening.gebruikt": [
+        {
+          "@type": [
+            "Werkzoekendeprofiel",
+            "Input"
+          ],
+          "Werkzoekendeprofiel.persoonlijkKenmerk": {
+            "@type": "PersoonlijkKenmerk",
+            "PersoonlijkKenmerk.werkvoorkeur": [
+              { "@id": "http://data.vlaanderen.be/concept/id/Beroep/Loodgieter" }
+            ],
+            "PersoonlijkKenmerk.leervoorkeur": [
+              { "@id": "http://data.vlaanderen.be/concept/id/Beroep/Installateur/HVAC" }
+            ],
+            "PersoonlijkKenmerk.werkafkeur": [
+              { "@id": "http://data.vlaanderen.be/concept/id/Beroep/Installateur/Gasketels" },
+              { "@id": "http://data.vlaanderen.be/concept/id/Beroep/Dakwerker" }
+            ]
+          }
+        }
+      ],
+      "PubliekeDienstverlening.heeftParticipant": [
+        {
+          "@type": "Participatie",
+          "Participatie.rol": {
+            "@id": "https://data.vlaanderen.be/concept/id/Werkzoekende"
+          },
+          "Participatie.agent": {
+            "@id": "http://example.com/id/JanaDeHinde"
+          }
+        },
+        {
+          "@type": "Participatie",
+          "Participatie.rol": {
+            "@id": "https://data.vlaanderen.be/concept/id/Begeleider"
+          },
+          "Participatie.agent": {
+            "@id": "http://example.com/id/JanVanDenBemiddelinghe"
+          }
+        },
+        {
+          "@type": "Participatie",
+          "Participatie.rol": {
+            "@id": "https://data.vlaanderen.be/concept/id/Dienstverlener"
+          },
+          "Participatie.agent": {
+            "@id": "https://data.vlaanderen.be/id/organisatie/OVO00007"
+          }
+        }
+      ],
+      "PubliekeDienstverlening.produceert": [
+          { "@id": "http://example.com/id/traject/001" }
+      ]
+    }
+  ]
+}

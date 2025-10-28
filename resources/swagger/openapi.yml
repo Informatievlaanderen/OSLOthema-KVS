@@ -1,0 +1,198 @@
+openapi: 3.1.0
+info:
+  title: KlantVolgSysteem
+  description: |-
+    KlantVolgSysteem 1.0 uitwisseling tussen VDAB en OCMWs via MAGDA.
+  version: 1.0.0
+externalDocs:
+  description: Contacteer MAGDA via de Servicedesk
+  url: https://vlaamseoverheid.atlassian.net/servicedesk/customer/portal/9/group/125/create/471
+servers:
+  - url: http://example.com/
+tags:
+  - name: Organisatie
+    description: 'Alle informatie over een Organisatie zoals KBO nummer, contactinfo, voorkeursnaam.  Elke partner die een KBO nummer heeft zijn allemaal een Organisatie.'
+  - name: Persoon
+    description: 'Alle informatie over een Persoon zoals ISZN, naam, geboorteplaats, gezinssituatie. Een begeleider, werkzoekende, contactpersoon, etc. zijn allemaal een Persoon.'
+  - name: Dienstverlening
+    description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
+paths:
+  /id/organisatie/{OvoCode}:
+    get:
+      tags:
+        - Organisatie
+      summary: Organisatie informatie.
+      description: Vraag alle informatie op over een Organisatie op basis van zijn OVO code.
+      operationId: getOrganisation
+      parameters:
+        - name: OvoCode
+          in: path
+          description: 'OVO code van de Organisatie. Zie [WegWijs Vlaanderen](https://wegwijs.vlaanderen.be).'
+          required: true
+          schema:
+            type: string
+          examples:
+            VDAB:
+              value: OVO000078
+              summary: VDAB
+
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                VDAB:
+                  summary: VDAB Organisatie
+                  externalValue: http://localhost:8000/organisatie.json
+            application/json:
+              schema:
+                type: object
+              examples:
+                VDAB:
+                  summary: VDAB Organisatie
+                  externalValue: http://localhost:8000/organisatie.json
+        '400':
+          description: Ongeldige OVO code.
+        '404':
+          description: Organisatie bestaat niet.
+        default:
+          description: Onbekende fout.
+  /id/persoon/{ID}:
+    get:
+      tags:
+        - Persoon
+      summary: Persoon informatie.
+      description: Vraag alle informatie op over een Persoon op basis van zijn ID zoals ISZN indien dit kan toegelaten is door de GDPR. Zo niet, moet er een ID gemaakt worden voor de Persoon.
+      operationId: getPerson
+      parameters:
+        - name: ID
+          in: path
+          description: 'ID van de Persoon.'
+          required: true
+          schema:
+            type: string
+          examples:
+            Werkzoekende:
+              value: JanaDeHinde
+              summary: Werkzoekende
+            Begeleider:
+              value: JanVanDenBemiddelinghe
+              summary: Begeleider
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                Werkzoekende:
+                  summary: Werkzoekende
+                  externalValue: http://localhost:8000/werkzoekende.json
+                Begeleider:
+                  summary: Begeleider
+                  externalValue: http://localhost:8000/begeleider.json
+            application/json:
+              schema:
+                type: object
+              examples:
+                Werkzoekende:
+                  summary: Werkzoekende
+                  externalValue: http://localhost:8000/werkzoekende.json
+                Begeleider:
+                  summary: Begeleider
+                  externalValue: http://localhost:8000/begeleider.json
+        '400':
+          description: Ongeldige ID.
+        '404':
+          description: Persoon bestaat niet.
+        default:
+          description: Onbekende fout.
+  /id/dienstverlening/{ID}:
+    get:
+      tags:
+        - Dienstverlening
+      summary: Dienstverlening informatie.
+      description: Vraag alle informatie op over een Dienstverlening tussen Organisaties en Personen zoals een Activeringstraject van een Werkzoekende door de Organisatie VDAB. Iedere Dienstverlening tussen Organisatie - Personen heeft zijn eigen ID.
+      operationId: getService
+      parameters:
+        - name: ID
+          in: path
+          description: 'ID van de Dienstverlening.'
+          required: true
+          schema:
+            type: string
+          examples:
+            Dienstverlening001:
+              value: '001'
+              summary: Dienstverlening 001
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                PubliekeDienstverlening:
+                  summary: Publieke Dienstverlening
+                  externalValue: http://localhost:8000/publieke-dienstverlening.json
+            application/json:
+              schema:
+                type: object
+              examples:
+                PubliekeDienstverlening:
+                  summary: Publieke Dienstverlening
+                  externalValue: http://localhost:8000/publieke-dienstverlening.json
+        '400':
+          description: Ongeldige ID.
+        '404':
+          description: Dienstverlening bestaat niet.
+        default:
+          description: Onbekende fout.
+  /id/traject/{ID}:
+    get:
+      tags:
+        - Traject
+      summary: Traject informatie.
+      description: Vraag alle informatie op over een Traject of Deeltraject op basis van zijn ID.
+      operationId: getTraject
+      parameters:
+        - name: ID
+          in: path
+          description: 'ID van het Traject.'
+          required: true
+          schema:
+            type: string
+          examples:
+            Traject001:
+              value: '001'
+              summary: Traject 001
+
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                Traject:
+                  summary: Traject
+                  externalValue: http://localhost:8000/traject.json
+            application/json:
+              schema:
+                type: object
+              examples:
+                Traject:
+                  summary: Traject
+                  externalValue: http://localhost:8000/traject.json
+        '400':
+          description: Ongeldige ID.
+        '404':
+          description: Traject bestaat niet.
+        default:
+          description: Onbekende fout.

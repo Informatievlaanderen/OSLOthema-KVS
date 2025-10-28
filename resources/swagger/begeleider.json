@@ -1,0 +1,32 @@
+{
+  "@context": [
+    "https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem/ontwerpstandaard/2025-10-27/context/KVS.jsonld",
+    {
+      "schema": "https://schema.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "http://example.com/id/JanVanDenBemiddelinghe",
+      "@type": [
+        "GeregistreerdPersoon",
+        "Agent"
+      ],
+      "Persoon.voornaam": "Jan",
+      "Persoon.achternaam": "Vanden Bemiddelinghe",
+      "Agent.participeert": {
+        "@id": "http://example.com/id/dienstverlening/001"
+      },
+      "Persoon.contactinfo": [
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.telefoon": {
+            "@value": "031234567"
+          },
+          "Contactpunt.email": "jan.vandenbemiddelinghe@vdab.be"
+        }
+      ]
+    }
+  ]
+}
