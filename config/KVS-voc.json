@@ -16,7 +16,7 @@
     "standaardregisterurl": "https://data.vlaanderen.be/standaarden/implementatiemodel-klantvolgsysteem/"
   },
   {
-    "name": "klantvolgsysteem1",
+    "name": "KVS-MAGDA-MAGDAOnline-R1",
     "type": "voc",
     "eap": "KVS-IMPL.eap",
     "diagram": "Klantvolgsysteem-MAGDA-MAGDA-Online-V1",
