@@ -19,7 +19,7 @@
     "name": "KVS-MAGDA-MAGDAOnline-R1",
     "type": "voc",
     "eap": "KVS-IMPL.eap",
-    "diagram": "Klantvolgsysteem-MAGDA-MAGDA-Online-V1",
+    "diagram": "Klantvolgsysteem-MAGDA-MAGDAOnline-V1",
     "template": "KVS-voc.j2",
     "title": "Vocabularium Klant Volg Systeem MAGDA ⇄ MAGDA Online Release 1",
     "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
