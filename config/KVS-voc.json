@@ -15,4 +15,20 @@
     "feedbackurl": "https://github.com/Informatievlaanderen/OSLOthema-KVS/issues",
     "standaardregisterurl": "https://data.vlaanderen.be/standaarden/implementatiemodel-klantvolgsysteem/"
   }
+  {
+    "name": "KVS-MAGDA-MAGDAOnline-R1",
+    "type": "voc",
+    "eap": "KVS-IMPL.eap",
+    "diagram": "Klantvolgsysteem-MAGDA-MAGDA-Online-V1",
+    "template": "KVS-voc.j2",
+    "title": "Vocabularium Klant Volg Systeem MAGDA ⇄ MAGDA Online Release 1",
+    "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
+    "publication-date": "2025-10-27",
+    "license": "https://data.vlaanderen.be/id/licentie/modellicentie-gratis-hergebruik/v1.0",
+    "contributors-file": "stakeholders.csv",
+    "contributors-column": "Rol",
+    "site": "site-skeleton/kvs-impl",
+    "feedbackurl": "https://github.com/Informatievlaanderen/OSLOthema-KVS/issues",
+    "standaardregisterurl": "https://data.vlaanderen.be/standaarden/implementatiemodel-klantvolgsysteem/"
+  }
 ]
