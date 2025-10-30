@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: KlantVolgSysteem MAGDA - MAGDA Online
+  description: |-
+    KlantVolgSysteem 1.0 uitwisseling tussen VDAB en OCMWs via MAGDA.
+    Deze Swagger beschrijft de API tussen MAGDA en MAGDA Online voor Release 1.
+  version: 1.0.0
+externalDocs:
+  description: Contacteer MAGDA via de Servicedesk
+  url: https://vlaamseoverheid.atlassian.net/servicedesk/customer/portal/9/group/125/create/471
+servers:
+  - url: https://magda.vlaanderen.be
+tags:
+  - name: Dienstverlening
+    description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
+paths:
+  /v1/dienstverlening/{Type}:
+    get:
+      tags:
+        - Dienstverlening
+      summary: Dienstverlening informatie.
+      description: Vraag alle informatie op over een Dienstverlening tussen Organisaties en Personen zoals een Activeringstraject van een Werkzoekende door de Organisatie VDAB. Iedere Dienstverlening tussen Organisatie - Personen heeft zijn eigen ID.
+      operationId: getService
+      parameters:
+        - name: X-Correlation-Id
+          in: header
+          description: 'Random UUID om het request te identificeren.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Tracing-Id
+          in: header
+          description: 'Tracing ID om het request te traceren tijdens logging.'
+          required: true
+          schema:
+            type: string
+        - name: X-Request-Id
+          in: header
+          description: 'Tracing ID van het request.'
+          required: true
+          schema:
+            type: string
+        - name: X-ISZN
+          in: header
+          description: 'ISZN code van de Werkzoekende.'
+          required: true
+          schema:
+            type: string
+          examples:
+            JanaDeHinde:
+              value: '77501820360'
+              summary: ISZN nummer Jana De Hinde
+        - name: Type
+          in: path
+          description: 'Type van de Dienstverlening.'
+          required: true
+          schema:
+            type: string
+          examples:
+            Dienstverlening001:
+              value: 'ActiveringNaarWerk'
+              summary: Dienstverlening Activering Naar Werk
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+              examples:
+                Dienstverlening001:
+                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
+                  externalValue: http://localhost:8000/release1.json
+            application/json:
+              schema:
+                type: object
+              examples:
+                Dienstverlening001:
+                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
+                  externalValue: http://localhost:8000/release1.json
+        '403':
+          description: Matching ontbreekt.
+        '404':
+          description: Dienstverlening bestaat niet.
+        '412':
+          description: Voorwaarden voldoen niet.
+        default:
+          description: Onbekende fout.
+      security:
+        - bearerAuth: []
