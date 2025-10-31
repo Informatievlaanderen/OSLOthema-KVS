@@ -1,5 +1,5 @@
 {
-  "@context": "https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem-magda-magdaonline-r1/ontwerpstandaard/2025-10-30/context/KVS.jsonld",
+  "@context": "https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-10-30/context/KVS-MAGDA-MAGDAOnline-R1.jsonld",
   "@graph": [
     {
       "@id": "_:Werkvoorkeuren",
@@ -29,17 +29,17 @@
 
     },
     {
-      "@id": ":_JanaDeHinde",
+      "@id": "_:JanaDeHinde",
       "@type": "GeregistreerdPersoon",
       "GeregistreerdPersoon.registratie": {
         "@type": "Identificator",
         "Identificator.identificator": "77501820360",
         "Identificator.toegekendDoor(String)": "Rijksregister"
       },
-      "Persoon.voornaam": "Jana",
-      "Persoon.achternaam": "De Hinde",
-      "Persoon.werkvoorkeuren": [ { "@id": "_:Werkvoorkeuren" } ],
-      "Persoon.contactinfo": [
+      "GeregistreerdPersoon.voornaam": "Jana",
+      "GeregistreerdPersoon.achternaam": "De Hinde",
+      "GeregistreerdPersoon.werkvoorkeuren": [ { "@id": "_:Werkvoorkeuren" } ],
+      "GeregistreerdPersoon.contactinfo": [
         {
           "@type": "Contactpunt",
           "Contactpunt.telefoon": { "@value": "+32489122334" }
@@ -119,47 +119,148 @@
       ]
     },
     {
+      "@id": "_:LoodgieterJohnnyBVBA",
+      "@type": "GeregistreerdeOrganisatie",
+      "GeregistreerdeOrganisatie.voorkeursnaam": {
+        "@value": "Loodgieter Johnny",
+        "@language": "nl"
+      },
+      "GeregistreerdeOrganisatie.registratie": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "1234.567.891",
+          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
+        }
+      ]
+    },
+    {
+      "@id": "_:SyntraAB",
+      "@type": "GeregistreerdeOrganisatie",
+      "GeregistreerdeOrganisatie.voorkeursnaam": {
+        "@value": "Syntra AB",
+        "@language": "nl"
+      },
+      "GeregistreerdeOrganisatie.contactinfo": [
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.adres": {
+            "@type": "Adresvoorstelling",
+            "Adresvoorstelling.straatnaam": { "@value": "Borsbeeksebrug", "@language": "nl" },
+            "Adresvoorstelling.straatcode": "123456",
+            "Adresvoorstelling.huisnummer": "32",
+            "Adresvoorstelling.postcode": "2600",
+            "Adresvoorstelling.gemeentenaam": { "@value": "Antwerpen", "@language": "nl" },
+            "Adresvoorstelling.gemeentecode": "123456",
+            "Adresvoorstelling.land": { "@value": "België", "@language": "nl" }
+          }
+        }
+      ],
+      "GeregistreerdeOrganisatie.registratie": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "0410.797.275",
+          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
+        }
+      ]
+    },
+    {
+      "@id": "_:Participatie001",
+      "@type": "Participatie",
+      "Participatie.rol": { "@id": "https://data.vlaanderen.be/concept/id/Rol/Werkzoekende" },
+      "Participatie.heeftParticipant": { "@id": "_:JanaDeHinde" }
+    },
+    {
+      "@id": "_:Participatie002",
+      "@type": "Participatie",
+      "Participatie.rol": { "@id": "https://data.vlaanderen.be/concept/id/Rol/Begeleider" },
+      "Participatie.heeftParticipant": { "@id": "_:JanVanDenBemiddelinghe" }
+    },
+    {
+      "@id": "_:Participatie003",
+      "@type": "Participatie",
+      "Participatie.rol": { "@id": "https://data.vlaanderen.be/concept/id/Rol/Bemiddelaar" },
+      "Participatie.heeftParticipant": { "@id": "_:VDAB" }
+    },
+    {
       "@id": "_:DienstverleningActiveringNaarWerk",
       "@type": "PubliekeDienstverlening",
       "PubliekeDienstverlening.heeftVerantwoordelijke": { "@id": "_:VDAB" },
       "PubliekeDienstverlening.gebruikt": [
         { "@id": "_:Werkvoorkeuren" }
       ],
-      "PubliekeDienstverlening.heeftParticipant": [
-        {
-          "@type": "Participatie",
-          "Participatie.rol": { "@id": "https://data.vlaanderen.be/concept/id/Rol/Werkzoekende" },
-          "Participatie.agent": { "@id": "_:JanaDeHinde" }
-        },
-        {
-          "@type": "Participatie",
-          "Participatie.rol": { "@id": "https://data.vlaanderen.be/concept/id/Rol/Begeleider" },
-          "Participatie.agent": { "@id": "_:JanVanDenBemiddelinghe" }
-        },
-        {
-          "@type": "Participatie",
-          "Participatie.rol": { "@id": "https://data.vlaanderen.be/concept/id/Bemiddelaar" },
-          "Participatie.agent": { "@id": "_:VDAB" }
-        }
-      ],
       "PubliekeDienstverlening.produceert": [
         { "@id": "_:Traject" }
+      ],
+      "PubliekeDienstverlening.heeftParticipatie": [
+        { "@id": "_:JanaDeHinde" },
+        { "@id": "_:JanVanDenBemiddelinghe" },
+        { "@id": "_:VDAB" }
       ]
     },
     {
       "@id": "_:Traject",
       "@type": "Activeringstraject",
-      "Traject.startdatum": {
-        "@value": "2024-10-15",
-        "@type": "Date"
+      "Activeringstraject.naam": { "@value": "Activeringstraject Jana De Hinde", "@language": "nl" },
+      "Activeringstraject.startdatum": {
+        "@value": "2024-10-15T15:00:00",
+        "@type": "DateTime"
       },
-      "Traject.startdatum": {
-        "@value": "2025-09-07",
-        "@type": "Date"
+      "Activeringstraject.startdatum": {
+        "@value": "2025-09-07T13:00:00",
+        "@type": "DateTime"
       },
-      "Traject.status": {
+      "Activeringstraject.status": {
         "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
-      }
+      },
+      "Activeringstraject.heeftParticipatie": [
+        { "@id": "_:JanaDeHinde" },
+        { "@id": "_:JanVanDenBemiddelinghe" },
+        { "@id": "_:VDAB" }
+      ],
+      "Activeringstraject.deeltraject": [
+        {
+          "@id": "_:Deeltraject001",
+          "@type": "Deeltraject",
+          "Deeltraject.naam": { "@value": "Opleiding Installateur HVAC", "@language": "nl" },
+          "Deeltraject.type": { "@id": "https://data.vlaanderen.be/concept/id/Deeltrajectype/Opleiding" },
+          "Deeltraject.startdatum": {
+            "@value": "2024-11-12T10:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.startdatum": {
+            "@value": "2025-02-07T13:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.status": {
+            "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+          },
+          "Deeltraject.heeftParticipatie": [
+            { "@id": "_:JanaDeHinde" },
+            { "@id": "_:SyntraAB" }
+          ]
+        },
+        {
+          "@id": "_:Deeltraject002",
+          "@type": "Deeltraject",
+          "Deeltraject.naam": { "@value": "Solicitatie Loodgieter", "@language": "nl" },
+          "Deeltraject.type": { "@id": "https://data.vlaanderen.be/concept/id/Deeltrajectype/Solicitatie" },
+          "Deeltraject.startdatum": {
+            "@value": "2025-03-01T09:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.startdatum": {
+            "@value": "2025-03-01T15:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.status": {
+            "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+          },
+          "Deeltraject.heeftParticipatie": [
+            { "@id": "_:JanaDeHinde" },
+            { "@id": "_:LoodgieterJohnnyBVBA" }
+          ]
+        }
+      ]
     }
   ]
 }
