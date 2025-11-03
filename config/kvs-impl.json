@@ -16,12 +16,12 @@
     "standaardregisterurl": "https://data.vlaanderen.be/standaarden/implementatiemodel-klantvolgsysteem/"
   },
   {
-    "name": "KVS-MAGDA-MAGDAOnline-R1",
+    "name": "KVS-R1",
     "type": "ap",
     "eap": "KVS-IMPL.eap",
     "diagram": "Klantvolgsysteem-MAGDA-MAGDAOnline-V1",
     "template": "KVS-impl.j2",
-    "title": "Implementatiemodel Klant Volg Systeem MAGDA ⇄ MAGDA Online Release 1",
+    "title": "Implementatiemodel Klant Volg Systeem Release 1",
     "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
     "publication-date": "2025-10-30",
     "license": "https://data.vlaanderen.be/id/licentie/modellicentie-gratis-hergebruik/v1.0",
