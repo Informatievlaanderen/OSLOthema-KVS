@@ -23,7 +23,7 @@
     "template": "KVS-voc.j2",
     "title": "Vocabularium Klant Volg Systeem Release 1",
     "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
-    "publication-date": "2025-10-27",
+    "publication-date": "2025-11-04",
     "license": "https://data.vlaanderen.be/id/licentie/modellicentie-gratis-hergebruik/v1.0",
     "contributors-file": "stakeholders.csv",
     "contributors-column": "Rol",
