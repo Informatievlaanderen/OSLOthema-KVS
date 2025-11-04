@@ -42,7 +42,7 @@ jobs:
           base_dir: target
           comment: true
           use_gitignore: false
-          json_exclude_regex: 'configuration\.json$'
+          json_exclude_regex: 'resources/datavoorbeelden/*'
       - name: Log validation result to summary
         run: |
           echo "# Summary" >> $GITHUB_STEP_SUMMARY
