@@ -25,3 +25,4 @@ Via de tab [issues](https://github.com/Informatievlaanderen/OSLOthema-KVS/issues
 | Naam|Status|Uitgiftedatum|AP|VOC|IMP|
 | --- |--- |---|---|---|---|
 | Klant Volg Systeem | Ontwerp | 2025-10-27 ||[Link](https://test.data.vlaanderen.be/ns/klantvolgsysteem/ontwerpstandaard/2025-10-27/)|[Link](https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem/ontwerpstandaard/2025-10-27/)|
+| Klant Volg Systeem Release 1 | Ontwerp | 2025-11-04 ||[Link](https://data.vlaanderen.be/ns/klantvolgsysteem1/)|[Link](https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/)|
