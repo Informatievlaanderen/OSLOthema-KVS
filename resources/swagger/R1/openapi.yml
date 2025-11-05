@@ -18,7 +18,7 @@ paths:
     get:
       tags:
         - Dienstverlening
-      summary: Dienstverlening informatie.
+      summary: Dienstverlening informatie opvragen.
       description: Vraag alle informatie op over een Dienstverlening tussen Organisaties en Personen zoals een Activeringstraject van een Werkzoekende door de Organisatie VDAB. Iedere Dienstverlening tussen Organisatie - Personen heeft zijn eigen ID.
       operationId: getService
       parameters:
@@ -85,5 +85,53 @@ paths:
           description: Voorwaarden voldoen niet.
         default:
           description: Onbekende fout.
+      security:
+        - bearerAuth: []
+  /v1/dienstverlening/{Type}:
+    post:
+      tags:
+        - Dienstverlening
+      summary: Dienstverlening informatie insturen.
+      description: Stuur alle informatie op over een Dienstverlening tussen Organisaties en Personen zoals een Activeringstraject van een Werkzoekende door de Organisatie VDAB. Iedere Dienstverlening tussen Organisatie - Personen heeft zijn eigen ID.
+      operationId: getService
+      parameters:
+        - name: X-Correlation-Id
+          in: header
+          description: 'Random UUID om het request te identificeren.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-INSZ
+          in: header
+          description: 'INSZ code van de Werkzoekende.'
+          required: true
+          schema:
+            type: string
+          examples:
+            JanaDeHinde:
+              value: '77501820360'
+              summary: INSZ nummer Jana De Hinde
+        - name: Type
+          in: path
+          description: 'Type van de Dienstverlening.'
+          required: true
+          schema:
+            type: string
+          examples:
+            Dienstverlening001:
+              value: 'ActiveringNaarWerk'
+              summary: Dienstverlening Activering Naar Werk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              Dienstverlening001:
+                externalValue: http://localhost:8000/release1.json
+          application/ld+json:
+            examples:
+              Dienstverlening001:
+                externalValue: http://localhost:8000/release1.json
       security:
         - bearerAuth: []
