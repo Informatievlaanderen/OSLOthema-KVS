@@ -69,14 +69,14 @@ paths:
               examples:
                 Dienstverlening001:
                   summary: 'Publieke Dienstverlening Activering Naar Werk.'
-                  externalValue: http://localhost:8000/release1.json
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
             application/json:
               schema:
                 type: object
               examples:
                 Dienstverlening001:
                   summary: 'Publieke Dienstverlening Activering Naar Werk.'
-                  externalValue: http://localhost:8000/release1.json
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
         '403':
           description: Toegang geweigerd.
         '404':
@@ -128,10 +128,10 @@ paths:
           application/json:
             examples:
               Dienstverlening001:
-                externalValue: http://localhost:8000/release1.json
+                externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
           application/ld+json:
             examples:
               Dienstverlening001:
-                externalValue: http://localhost:8000/release1.json
+                externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
       security:
         - bearerAuth: []
