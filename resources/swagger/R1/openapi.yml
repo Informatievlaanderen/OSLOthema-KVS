@@ -83,7 +83,7 @@ paths:
           description: Dienstverlening bestaat niet.
         '502':
           description: Business dienst of gateway is niet beschikbaar.
-        '204'
+        '204':
           description: Ophalen van de dienstverlening is gelukt maar er is geen data.
         '400':
           description: Parameter of validatie van de vraag is gefaald. Controleer de parameters.
@@ -140,7 +140,7 @@ paths:
       responses:
         '200':
           description: Dienstverlening aangemaakt.
-        '204'
+        '204':
           description: Dienstverlening aangemaakt.
         '401':
           description: Toegang geweigerd. Token is ongeldig of niet toegekend in de infrastructuur.
