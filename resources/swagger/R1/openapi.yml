@@ -78,78 +78,121 @@ paths:
                 Dienstverlening001:
                   summary: 'Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
-        '401':
-          description: Toegang geweigerd. Token is ongeldig of niet toegekend in de infrastructuur.
-        '404':
-          description: Dienstverlening bestaat niet.
-        '502':
-          description: Business dienst of gateway is niet beschikbaar.
-        '204':
-          description: Ophalen van de dienstverlening is gelukt maar er is geen data.
         '400':
-          description: Parameter of validatie van de vraag is gefaald. Controleer de parameters.
-        default:
-          description: Onbekende fout.
-      security:
-        - bearerAuth: []
-  /v1/dienstverlening/{Type}:
-    post:
-      tags:
-        - Dienstverlening
-      summary: Dienstverlening informatie insturen.
-      description: Stuur alle informatie op over een Dienstverlening tussen Organisaties en Personen zoals een Activeringstraject van een Werkzoekende door de Organisatie VDAB. Iedere Dienstverlening tussen Organisatie - Personen heeft zijn eigen ID.
-      operationId: getService
-      parameters:
-        - name: X-Correlation-Id
-          in: header
-          description: 'Random UUID om het request te identificeren.'
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - name: X-INSZ
-          in: header
-          description: 'INSZ code van de Werkzoekende.'
-          required: true
-          schema:
-            type: string
-          examples:
-            JanaDeHinde:
-              value: '77501820360'
-              summary: INSZ nummer Jana De Hinde
-        - name: Type
-          in: path
-          description: 'Type van de Dienstverlening.'
-          required: true
-          schema:
-            type: string
-          examples:
-            Dienstverlening001:
-              value: 'ActiveringNaarWerk'
-              summary: Dienstverlening Activering Naar Werk
-      requestBody:
-        required: true
-        content:
-          application/json:
-            examples:
-              Dienstverlening001:
-                externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
-          application/ld+json:
-            examples:
-              Dienstverlening001:
-                externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
-      responses:
-        '200':
-          description: Dienstverlening aangemaakt.
-        '204':
-          description: Dienstverlening aangemaakt.
+          $ref: '#/components/responses/BadRequest'
         '401':
-          description: Toegang geweigerd. Token is ongeldig of niet toegekend in de infrastructuur.
+          $ref: '#/components/responses/InvalidAuthorization'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
-          description: Dienstverlening bestaat niet.
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/UnexpectedServerError'
         '502':
-          description: Business dienst of gateway is niet beschikbaar.
-        '400':
-          description: Parameter of validatie van de vraag is gefaald. Controleer de parameters.
-      security:
-        - bearerAuth: []
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
+components:
+  parameters:
+    CorrelationId:
+      name: x-correlation-id
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/Correlation-Id'
+  responses:
+    #HTTP Status 400
+    BadRequest:
+      description: "Invalid data supplied"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 401
+    InvalidAuthorization:
+      description: "Invalid authorization"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 403
+    Forbidden:
+      description: "Authentication failed"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 404
+    NotFound:
+      description: "Resource not found"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 412
+    PreConditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 500
+    UnexpectedServerError:
+      description: "Unexpected Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 502
+    BadGateway:
+      description: "Bad Gateway"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 503
+    ServiceUnavailable:
+      description: "Service unavailable"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 504
+    GatewayTimeout:
+      description: "Gateway Timeout"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+  schemas:
+    Correlation-Id:
+      description: "ID of the transaction. Use this ID for log tracing and incident handling"
+      type: string
+      minLength: 10
+      maxLength: 36
+
+    ErrorMessage:
+      required:
+        - detail
+        - title
+      type: object
+      properties:
+        type:
+          type: string
+          description: "A URI reference that identifies the problem type. This specification encourages that, when de-referenced, it provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be about:blank."
+        title:
+          type: string
+          description: "A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation."
+        status:
+          type: string
+          description: "The HTTP status code generated by the origin server for this occurrence of the problem."
+        detail:
+          type: string
+          description: "A human-readable explanation specific to this occurrence of the problem."
+        instance:
+          type: string
+          description: "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if de-referenced."
+      description: "A representation of a generic error message."
