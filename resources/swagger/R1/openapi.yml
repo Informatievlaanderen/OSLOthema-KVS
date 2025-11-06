@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.4
 info:
   title: KlantVolgSysteem Release 1
   description: |-
@@ -15,7 +15,7 @@ tags:
   - name: Dienstverlening
     description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
 paths:
-  /v1/dienstverleningen/{Type}?tijdstip={tijdstip}:
+  /v1/dienstverleningen/{Type}:
     get:
       tags:
         - Dienstverlening
@@ -51,7 +51,7 @@ paths:
               value: 'ActiveringNaarWerk'
               summary: Dienstverlening Activering Naar Werk
         - name: tijdstip
-          in: path
+          in: query
           description: 'Tijdstip wanneer de dienstverlening heeft plaatsgevonden.'
           required: true
           schema:
@@ -66,14 +66,14 @@ paths:
           content:
             application/ld+json:
               schema:
-                type: object
+                $ref: "#/components/schemas/JsonLdRoot"
               examples:
                 Dienstverlening001:
                   summary: 'Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/JsonLdRoot"
               examples:
                 Dienstverlening001:
                   summary: 'Publieke Dienstverlening Activering Naar Werk.'
@@ -196,3 +196,526 @@ components:
           type: string
           description: "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if de-referenced."
       description: "A representation of a generic error message."
+
+    JsonLdLiteral:
+      # JSON-LD literal with only a value
+      # { '@value': 'something' }
+      type: object
+      properties:
+        '@value':
+            type: string
+      required:
+        - '@value'
+
+    JsonLdLiteralLanguage:
+      # JSON-LD literal consists of a value with a language or datatype tag
+      # { '@value': 'string', '@language': 'nl' }
+      # or
+      # { '@value': 'string', '@type': 'http://www.w3.org/2001/XMLSchema#myDataType' }
+      type: object
+      properties:
+        '@value':
+          type: string
+        '@language':
+          type: string
+          enum: ['nl']
+      required:
+        - '@value'
+        - '@language'
+
+    JsonLdLiteralDateTime:
+      # JSON-LD literal consists of a value with a language or datatype tag
+      # { '@value': 'string', '@language': 'nl' }
+      # or
+      # { '@value': 'string', '@type': 'http://www.w3.org/2001/XMLSchema#myDataType' }
+      type: object
+      properties:
+        '@value':
+          type: string
+          format: date-time
+        '@type':
+          type: string
+          enum: ['DateTime']
+      required:
+        - '@value'
+        - '@type'
+
+    JsonLdRoot:
+      type: object
+      properties:
+        # JSON-LD @context is an array with URIs or an object that maps an URI onto a label.
+        # "@context": [
+        #   "http://example.com/myContext",
+        #   {
+        #     "ex2": "http://example.com/myContext2"
+        #   }
+        # ]
+        '@context':
+          type: array
+          items:
+            oneOf:
+              - type: string
+                format: uri
+                enum: ['https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld']
+              - type: object
+                properties:
+                  SKOS.prefLabel:
+                    type: string
+                    format: uri
+                    enum: ['http://www.w3.org/2004/02/skos/core#prefLabel']
+                required:
+                  - SKOS.prefLabel
+        # JSON-LD @graph contains the data objects which is an array with a specific list of possible objects.
+        # "@graph": [
+        #  ...
+        # ]
+        '@graph':
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/Werkvoorkeuren"
+              - $ref: "#/components/schemas/GeregistreerdPersoon"
+              - $ref: "#/components/schemas/Persoon"
+              - $ref: "#/components/schemas/PubliekeOrganisatie"
+              - $ref: "#/components/schemas/GeregistreerdeOrganisatie"
+              - $ref: "#/components/schemas/Participatie"
+              - $ref: "#/components/schemas/PubliekeDienstverlening"
+              - $ref: "#/components/schemas/Activeringstraject"
+              - $ref: "#/components/schemas/Deeltraject"
+          minItems: 0
+
+    Beroepstoestand:
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum: ['Beroepstoestand']
+        Beroepstoestand.naam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        Beroepstoestand.voorkeur:
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+              enum: ['http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep',
+                     'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep',
+                     'http://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep',
+                     'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeLerenBeroep']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  enum: ['Uitgesloten Beroep',
+                         'Te Verkennen Beroep',
+                         'Gewenst Beroep',
+                         'Te Leren Beroep']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+      required:
+        - '@type'
+
+    Werkvoorkeuren:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['Werkvoorkeuren']
+        Werkvoorkeuren.beroep:
+          type: array
+          items:
+            $ref: '#/components/schemas/Beroepstoestand'
+          minItems: 0
+      required:
+        - '@id'
+        - '@type'
+
+    Identificator:
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum: ['Identificator']
+        'Identificator.identificator':
+          type: string
+        'Identificator.toegekendDoor(String)':
+          type: string
+      required:
+        - '@type'
+
+    Adresvoorstelling:
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum: ['Adresvoorstelling']
+        Adresvoorstelling.straatnaam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        Adresvoorstelling.straatcode:
+          type: string
+        Adresvoorstelling.huisnummer:
+          type: string
+        Adresvoorstelling.postcode:
+          type: string
+        Adresvoorstelling.gemeentenaam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        Adresvoorstelling.gemeentecode:
+          type: string
+        Adresvoorstelling.land:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+      required:
+        - '@type'
+
+    Contactpunt:
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum: ['Contactpunt']
+        Contactpunt.telefoon:
+          $ref: '#/components/schemas/JsonLdLiteral'
+        Contactpunt.adres:
+          $ref: '#/components/schemas/Adresvoorstelling'
+        Contactpunt.email:
+          $ref: '#/components/schemas/JsonLdLiteral'
+      required:
+        - '@type'
+
+    GeregistreerdPersoon:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['GeregistreerdPersoon']
+        GeregistreerdPersoon.registratie:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identificator'
+          minItems: 0
+        GeregistreerdPersoon.voornaam:
+          type: string
+        GeregistreerdPersoon.achternaam:
+          type: string
+        GeregistreerdPersoon.werkvoorkeuren:
+          type: array
+          items:
+            type: object
+            '@id':
+              type: string
+            required:
+              - '@id'
+          minItems: 0
+        GeregistreerdPersoon.contactinfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contactpunt'
+          minItems: 0
+      required:
+        - '@id'
+        - '@type'
+
+    Persoon:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['Persoon']
+        Persoon.voornaam:
+          type: string
+        Persoon.achternaam:
+          type: string
+        Persoon.contactinfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contactpunt'
+          minItems: 0
+      required:
+        - '@id'
+        - '@type'
+
+    PubliekeOrganisatie:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['PubliekeOrganisatie']
+        PubliekeOrganisatie.voorkeursnaam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        PubliekeOrganisatie.contactinfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contactpunt'
+          minItems: 0
+        PubliekeOrganisatie.identificator:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identificator'
+          minItems: 0
+      required:
+        - '@id'
+        - '@type'
+
+    GeregistreerdeOrganisatie:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['GeregistreerdeOrganisatie']
+        GeregistreerdeOrganisatie.voorkeursnaam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        PubliekeOrganisatie.registratie:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identificator'
+          minItems: 0
+      required:
+        - '@id'
+        - '@type'
+
+    Participatie:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['Participatie']
+        Participatie.rol:
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende',
+                     'https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar',
+                     'https://data.vlaanderen.be/id/concept/Participatietype/Begeleider',
+                     'https://data.vlaanderen.be/id/concept/Participatietype/Contactpersoon']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  enum: ['Werkzoekende',
+                         'Bemiddelaar',
+                         'Begeleider',
+                         'Contactpersoon']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+        Participatie.heeftParticipant:
+          type: object
+          properties:
+            '@id':
+              type: string
+          required:
+              - '@id'
+      required:
+        - '@id'
+        - '@type'
+
+    PubliekeDienstverlening:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['PubliekeDienstverlening']
+        PubliekeDienstverlening.heeftVerantwoordelijke:
+          type: object
+          properties:
+             '@id':
+              type: string
+          required:
+            - '@id'
+          minItems: 0
+        PubliekeDienstverlening.heeftParticipatie:
+          type: array
+          items:
+            type: object
+            properties:
+              '@id':
+                type: string
+            required:
+              - '@id'
+          minItems: 0
+        PubliekeDienstverlening.type:
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  enum: ['Activering Naar Werk']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+      required:
+        - '@id'
+        - '@type'
+
+    Activeringstraject:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['Activeringstraject']
+        Activeringstraject.naam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        Activeringstraject.startdatum:
+          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+        Activeringstraject.einddatum:
+          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+        Activeringstraject.status:
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/TrajectStatus/Actief',
+                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
+                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Passief',
+                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  enum: ['Actief',
+                         'Stopgezet',
+                         'Passief',
+                         'Uitgevoerd']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+        Activeringstraject.heeftParticipatie:
+          type: array
+          items:
+            type: object
+            properties:
+              '@id':
+                type: string
+            required:
+              - '@id'
+          minItems: 0
+      required:
+        - '@id'
+        - '@type'
+
+    Deeltraject:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+          enum: ['Deeltraject']
+        Deeltraject.naam:
+          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+        Deeltraject.startdatum:
+          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+        Deeltraject.einddatum:
+          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+        Deeltraject.type:
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding',
+                     'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender',
+                     'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Oriëntering']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  enum: ['Opleiding',
+                         'Tender',
+                         'Oriëntering']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+        Deeltraject.status:
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/TrajectStatus/Actief',
+                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
+                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Passief',
+                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  enum: ['Actief',
+                         'Stopgezet',
+                         'Passief',
+                         'Uitgevoerd']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+        Deeltraject.heeftParticipatie:
+          type: array
+          items:
+            type: object
+            properties:
+              '@id':
+                type: string
+            required:
+              - '@id'
+          minItems: 0
+      required:
+        - '@type'

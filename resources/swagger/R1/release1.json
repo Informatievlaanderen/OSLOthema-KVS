@@ -1,6 +1,6 @@
 {
   "@context": [
-    "https://test.data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-10-30/context/KVS-R1.jsonld",
+    "https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld",
     {
       "SKOS.prefLabel": "http://www.w3.org/2004/02/skos/core#prefLabel"
     }
@@ -15,7 +15,7 @@
           "Beroepstoestand.naam": { "@value": "Loodgieter", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
             "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep",
-            "SKOS.prefLabel": { "@value": "Gewenst beroep", "@language": "nl" }
+            "SKOS.prefLabel": { "@value": "Gewenst Beroep", "@language": "nl" }
           }
         },
         {
@@ -23,7 +23,7 @@
           "Beroepstoestand.naam": { "@value": "Installateur HVAC", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
             "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep",
-            "SKOS.prefLabel": { "@value": "Te verkennen beroep", "@language": "nl" }
+            "SKOS.prefLabel": { "@value": "Te Verkennen Beroep", "@language": "nl" }
           }
         },
         {
@@ -31,7 +31,7 @@
           "Beroepstoestand.naam": { "@value": "Dakwerker", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
             "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
-            "SKOS.prefLabel": { "@value": "Uitgesloten beroep", "@language": "nl" }
+            "SKOS.prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" }
           }
         },
         {
@@ -39,7 +39,7 @@
           "Beroepstoestand.naam": { "@value": "Installateur Gasketels", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
             "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
-            "SKOS.prefLabel": { "@value": "Uitgesloten beroep", "@language": "nl" }
+            "SKOS.prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" }
           }
         }
      ]
@@ -48,11 +48,13 @@
     {
       "@id": "_:JanaDeHinde",
       "@type": "GeregistreerdPersoon",
-      "GeregistreerdPersoon.registratie": {
-        "@type": "Identificator",
-        "Identificator.identificator": "77501820360",
-        "Identificator.toegekendDoor(String)": "Rijksregister"
-      },
+      "GeregistreerdPersoon.registratie": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "77501820360",
+          "Identificator.toegekendDoor(String)": "Rijksregister"
+        }
+      ],
       "GeregistreerdPersoon.voornaam": "Jana",
       "GeregistreerdPersoon.achternaam": "De Hinde",
       "GeregistreerdPersoon.werkvoorkeuren": [ { "@id": "_:Werkvoorkeuren" } ],
@@ -96,7 +98,7 @@
         },
         {
           "@type": "Contactpunt",
-          "Contactpunt.email": "jan.vandenbemiddelinghe@vdab.be"
+          "Contactpunt.email": { "@value": "jan.vandenbemiddelinghe@vdab.be" }
         }
       ]
     },
@@ -184,7 +186,7 @@
       "@id": "_:Participatie001",
       "@type": "Participatie",
       "Participatie.rol": {
-        "@id": "https://data.vlaanderen.be/concept/id/Participatietype/Werkzoekende",
+        "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende",
         "SKOS.prefLabel": { "@value": "Werkzoekende", "@language": "nl" }
       },
       "Participatie.heeftParticipant": { "@id": "_:JanaDeHinde" }
@@ -193,7 +195,7 @@
       "@id": "_:Participatie002",
       "@type": "Participatie",
       "Participatie.rol": {
-        "@id": "https://data.vlaanderen.be/concept/id/Participatietype/Begeleider",
+        "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Begeleider",
         "SKOS.prefLabel": { "@value": "Begeleider", "@language": "nl" }
       },
       "Participatie.heeftParticipant": { "@id": "_:JanVanDenBemiddelinghe" }
@@ -202,7 +204,7 @@
       "@id": "_:Participatie003",
       "@type": "Participatie",
       "Participatie.rol": {
-        "@id": "https://data.vlaanderen.be/concept/id/Participatietype/Bemiddelaar",
+        "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar",
         "SKOS.prefLabel": { "@value": "Bemiddelaar", "@language": "nl" }
       },
       "Participatie.heeftParticipant": { "@id": "_:VDAB" }
@@ -223,7 +225,7 @@
         { "@id": "_:VDAB" }
       ],
       "PubliekeDienstverlening.type": {
-        "@id": "https://data.vlaanderen.be/concept/id/PubliekeDienstverleningType/ActiveringNaarWerk",
+        "@id": "https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk",
         "SKOS.prefLabel": { "@value": "Activering Naar Werk", "@language": "nl" }
       }
     },
@@ -254,7 +256,7 @@
           "@type": "Deeltraject",
           "Deeltraject.naam": { "@value": "Opleiding Installateur HVAC", "@language": "nl" },
           "Deeltraject.type": {
-            "@id": "https://data.vlaanderen.be/concept/id/Deeltrajectype/Opleiding",
+            "@id": "https://data.vlaanderen.be/id/concept/Deeltrajectype/Opleiding",
             "SKOS.prefLabel": { "@value": "Opleiding", "@language": "nl" }
           },
           "Deeltraject.startdatum": {
@@ -279,7 +281,7 @@
           "@type": "Deeltraject",
           "Deeltraject.naam": { "@value": "Solicitatie Loodgieter", "@language": "nl" },
           "Deeltraject.type": {
-            "@id": "https://data.vlaanderen.be/concept/id/Deeltrajectype/Solicitatie",
+            "@id": "https://data.vlaanderen.be/id/concept/Deeltrajectype/Solicitatie",
             "SKOS.prefLabel": { "@value": "Solicitatie", "@language": "nl" }
           },
           "Deeltraject.startdatum": {
