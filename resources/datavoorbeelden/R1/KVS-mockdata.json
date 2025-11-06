@@ -81,14 +81,14 @@
           "@type": "Inwonerschap",
           "Inwonerschap.heeftVerblijfplaats": {
             "@type": "Verblijfplaats",
-            "Verblijfplaats.verblijfadres":  { "@id": "_:JanaDeHindeVerblijfplaats" }
+            "Verblijfplaats.verblijfsadres":  { "@id": "_:JanaDeHindeVerblijfplaats" }
           }
         },
         {
           "@type": "Inwonerschap",
           "Inwonerschap.heeftVerblijfplaats": {
             "@type": "Domicilie",
-            "Verblijfplaats.verblijfadres":  { "@id": "_:JanaDeHindeDomicilie" }
+            "Verblijfplaats.verblijfsadres":  { "@id": "_:JanaDeHindeDomicilie" }
           }
         }
       ],
