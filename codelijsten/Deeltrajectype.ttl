@@ -12,7 +12,7 @@
     skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype> ;
     skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype> .
 
-<https://data.vlaanderen.be/id/concept/Deeltrajecttype/Oriëntering>
+<https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering>
     a skos:Concept ;
     skos:prefLabel "Oriëntering"@nl ;
     skos:definition "Deeltraject waarin men verschillende beroepen verkent."@nl ;
