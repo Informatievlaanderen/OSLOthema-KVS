@@ -197,49 +197,6 @@ components:
           description: "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if de-referenced."
       description: "A representation of a generic error message."
 
-    JsonLdLiteral:
-      # JSON-LD literal with only a value
-      # { '@value': 'something' }
-      type: object
-      properties:
-        '@value':
-            type: string
-      required:
-        - '@value'
-
-    JsonLdLiteralLanguage:
-      # JSON-LD literal consists of a value with a language or datatype tag
-      # { '@value': 'string', '@language': 'nl' }
-      # or
-      # { '@value': 'string', '@type': 'http://www.w3.org/2001/XMLSchema#myDataType' }
-      type: object
-      properties:
-        '@value':
-          type: string
-        '@language':
-          type: string
-          enum: ['nl']
-      required:
-        - '@value'
-        - '@language'
-
-    JsonLdLiteralDateTime:
-      # JSON-LD literal consists of a value with a language or datatype tag
-      # { '@value': 'string', '@language': 'nl' }
-      # or
-      # { '@value': 'string', '@type': 'http://www.w3.org/2001/XMLSchema#myDataType' }
-      type: object
-      properties:
-        '@value':
-          type: string
-          format: date-time
-        '@type':
-          type: string
-          enum: ['DateTime']
-      required:
-        - '@value'
-        - '@type'
-
     JsonLdRoot:
       type: object
       properties:
@@ -252,15 +209,18 @@ components:
         # ]
         '@context':
           type: array
+          description: "JSON-LD's context which defines how the JSON-LD keys are mapped to URIs."
           items:
             oneOf:
               - type: string
                 format: uri
+                description: "JSON-LD's external contexts as URIs."
                 enum: ['https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld']
               - type: object
                 properties:
                   SKOS.prefLabel:
                     type: string
+                    description: "URI for W3C SKOS Core prefLabel attribute."
                     format: uri
                     enum: ['http://www.w3.org/2004/02/skos/core#prefLabel']
                 required:
@@ -282,21 +242,40 @@ components:
               - $ref: "#/components/schemas/PubliekeDienstverlening"
               - $ref: "#/components/schemas/Activeringstraject"
               - $ref: "#/components/schemas/Deeltraject"
+              - $ref: "#/components/schemas/Verblijfplaats"
+              - $ref: "#/components/schemas/Domicilie"
+              - $ref: "#/components/schemas/Adresvoorstelling"
           minItems: 0
 
     Beroepstoestand:
       type: object
+      description: "Voorkeur voor een bepaald beroep."
       properties:
         '@type':
           type: string
+          description: "Object type."
           enum: ['Beroepstoestand']
         Beroepstoestand.naam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: "Naam van het beroep."
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
         Beroepstoestand.voorkeur:
           type: object
+          description: "De soort voorkeur voor een bepaald beroep."
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Voorkeurtype enum value URI.'
               format: uri
               enum: ['http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep',
                      'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep',
@@ -306,12 +285,14 @@ components:
               properties:
                 '@value':
                   type: string
+                  description: "Voorkeurtype enum value string."
                   enum: ['Uitgesloten Beroep',
                          'Te Verkennen Beroep',
                          'Gewenst Beroep',
                          'Te Leren Beroep']
                 '@language':
                   type: string
+                  description: "Literal's language tag."
                   enum: ['nl']
               required:
                 - '@value'
@@ -324,14 +305,18 @@ components:
 
     Werkvoorkeuren:
       type: object
+      description: 'De voorkeuren van de Werkzoekende bij het zoeken naar werk.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['Werkvoorkeuren']
         Werkvoorkeuren.beroep:
           type: array
+          description: "Voorkeuren voor bepaalde beroepen."
           items:
             $ref: '#/components/schemas/Beroepstoestand'
           minItems: 0
@@ -341,106 +326,289 @@ components:
 
     Identificator:
       type: object
+      description: "Informatie gebruikt om een object uniek te identificeren."
       properties:
         '@type':
           type: string
+          description: "Object type."
           enum: ['Identificator']
         'Identificator.identificator':
           type: string
+          description: "String gebruikt om het object uniek te identificeren."
         'Identificator.toegekendDoor(String)':
           type: string
+          description: "Naam vd agent die de identificator heeft toegekend."
       required:
         - '@type'
 
     Adresvoorstelling:
       type: object
+      description: 'Meer leesbare voorstelling met enkel de basisgegevens van het adres, bedoeld voor het gebruik van een adres als attribuut van een ander object.'
       properties:
+        '@id':
+          type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['Adresvoorstelling']
         Adresvoorstelling.straatnaam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: 'Straatnaam van het adres.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
         Adresvoorstelling.straatcode:
-          type: string
+          type: object
+          description: 'De NIS code van de straat.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+          required:
+            - '@value'
+        Adresvoorstelling.busnummer:
+          type: object
+          description: 'Officieel toegekende alfanumerieke code die wordt toegevoegd aan het huisnummer om meerdere gebouweenheden, standplaatsen, ligplaatsen of percelen te onderscheiden die eenzelfde huisnummer hebben.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+          required:
+            - '@value'
         Adresvoorstelling.huisnummer:
-          type: string
+          type: object
+          description: 'Alfanumerieke code officieel toegekend aan gebouweenheden, ligplaatsen, standplaatsen of percelen.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+          required:
+            - '@value'
         Adresvoorstelling.postcode:
-          type: string
+          type: object
+          description: 'Code waarmee het geografisch gebied dat adressen voor postale doeleinden groepeert wordt aangeduid.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+          required:
+            - '@value'
         Adresvoorstelling.gemeentenaam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: 'Gemeentenaam van het adres.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
         Adresvoorstelling.gemeentecode:
-          type: string
+          type: object
+          description: 'De NIS code van de gemeente.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+          required:
+            - '@value'
         Adresvoorstelling.land:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: 'Land waarin het adres gelegen is.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
       required:
         - '@type'
 
     Contactpunt:
       type: object
+      description: 'Informatie zoals email, telefoon, adres die toelaat om iemand of iets te contacteren.'
       properties:
         '@type':
           type: string
+          description: "Object type."
           enum: ['Contactpunt']
         Contactpunt.telefoon:
-          $ref: '#/components/schemas/JsonLdLiteral'
+          type: object
+          description: 'Telefoonnummer waarop men kan bellen.'
+          properties:
+            '@value':
+              description: "JSON-LD's Literal value without a datatype or language tag."
+              type: string
+          required:
+            - '@value'
         Contactpunt.adres:
-          $ref: '#/components/schemas/Adresvoorstelling'
+          type: object
+          description: 'Adres dat men kan aanschrijven of bezoeken.'
+          properties:
+             '@id':
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to an Adresvoorstelling instance.'
+              type: string
+          required:
+            - '@id'
         Contactpunt.email:
-          $ref: '#/components/schemas/JsonLdLiteral'
+          type: object
+          description: 'Email-adres waarnaar men kan mailen.'
+          properties:
+            '@value':
+              description: "JSON-LD's Literal value without a datatype or language tag."
+              type: string
+          required:
+            - '@value'
       required:
         - '@type'
 
+    Verblijfplaats:
+      type: object
+      description: 'Plaats waar een Persoon al dan niet tijdelijk woont of logeert.'
+      properties:
+        '@type':
+          type: string
+          description: "Object type."
+          enum: ['Verblijfplaats']
+        Verblijfplaats.verblijfsadres:
+          type: object
+          description: 'Adres dat men kan aanschrijven of bezoeken.'
+          properties:
+             '@id':
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to an Adresvoorstelling instance.'
+              type: string
+          required:
+            - '@id'
+
+    Domicilie:
+      type: object
+      description: 'Plaats waar een Persoon al dan niet tijdelijk woont of logeert.'
+      properties:
+        '@type':
+          type: string
+          description: "Object type."
+          enum: ['Domicilie']
+        Verblijfplaats.verblijfsadres:
+          type: object
+          description: 'Adres dat men kan aanschrijven of bezoeken.'
+          properties:
+             '@id':
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to an Adresvoorstelling instance.'
+              type: string
+          required:
+            - '@id'
+
+    Inwonerschap:
+      type: object
+      description: 'Het feit dat een persoon verblijf houdt in een plaats of land.'
+      properties:
+        '@type':
+          type: string
+          description: "Object type."
+          enum: ['Inwonerschap']
+        heeftVerblijfplaats:
+          description: 'Plaats waar een persoon verblijft.'
+          oneOf:
+            - $ref: '#/components/schemas/Verblijfplaats'
+            - $ref: '#/components/schemas/Domicilie'
+
     GeregistreerdPersoon:
       type: object
+      description: 'Persoon waarvan de gegevens zijn ingeschreven in een register.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['GeregistreerdPersoon']
         GeregistreerdPersoon.registratie:
+          description: 'Identificatiecode van de persoon in het register.'
           type: array
           items:
             $ref: '#/components/schemas/Identificator'
-          minItems: 0
+          minItems: 1
         GeregistreerdPersoon.voornaam:
           type: string
+          description: 'Naam die een Persoon bij geboorte wordt gegeven. Onderscheidt de Persoon van de andere personen in de familie.'
         GeregistreerdPersoon.achternaam:
           type: string
+          description: 'Gedeelte van de volledige naam van de Persoon ontvangen van de vorige generatie.'
         GeregistreerdPersoon.werkvoorkeuren:
           type: array
+          description: 'De voorkeuren voor werk van een Persoon.'
           items:
             type: object
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Werkvoorkeuren instance.'
             required:
               - '@id'
           minItems: 0
         GeregistreerdPersoon.contactinfo:
           type: array
+          description: 'Informatie zoals email, telefoon... die toelaat de Persoon te contacteren.'
           items:
             $ref: '#/components/schemas/Contactpunt'
+          minItems: 0
+        GeregistreerdPersoon.inwonerschap:
+          type: array
+          description: 'Jurisdictie waarbinnen het Inwonerschap van de Persoon is gedefinieerd.'
+          items:
+            $ref: '#/components/schemas/Inwonerschap'
           minItems: 0
       required:
         - '@id'
         - '@type'
+        - GeregistreerdPersoon.registratie
 
     Persoon:
       type: object
+      description: 'Natuurlijk persoon.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['Persoon']
         Persoon.voornaam:
           type: string
+          description: 'Naam die een Persoon bij geboorte wordt gegeven. Onderscheidt de Persoon van de andere personen in de familie.'
         Persoon.achternaam:
           type: string
+          description: 'Gedeelte van de volledige naam van de Persoon ontvangen van de vorige generatie.'
         Persoon.contactinfo:
           type: array
+          description: 'Informatie zoals email, telefoon... die toelaat de Persoon te contacteren.'
           items:
             $ref: '#/components/schemas/Contactpunt'
+          minItems: 0
+        Persoon.inwonerschap:
+          type: array
+          description: 'Jurisdictie waarbinnen het Inwonerschap van de Persoon is gedefinieerd.'
+          items:
+            $ref: '#/components/schemas/Inwonerschap'
           minItems: 0
       required:
         - '@id'
@@ -448,60 +616,156 @@ components:
 
     PubliekeOrganisatie:
       type: object
+      description: 'Een Organisatie die volgens een wettelijk kader behoort tot de publieke sector, ongeacht het bestuursniveau waarop dat kader van kracht is.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['PubliekeOrganisatie']
         PubliekeOrganisatie.voorkeursnaam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: 'Naam waarmee de Organisatie bij voorkeur wordt aangeduid.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
         PubliekeOrganisatie.contactinfo:
           type: array
+          description: 'Informatie zoals email, telefoon... die toelaat de Organisatie te contacteren.'
           items:
             $ref: '#/components/schemas/Contactpunt'
           minItems: 0
         PubliekeOrganisatie.identificator:
           type: array
+          description: 'Identificator die de organisatie uniek identificeert.'
           items:
             $ref: '#/components/schemas/Identificator'
           minItems: 0
+        PubliekeOrganisatie.type:
+          type: object
+          description: 'Het soort Organisatie.'
+          properties:
+            '@id':
+              type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a OrganisatieType enum value URI.'
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB',
+                     'https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  description: "OrganisatieType enum value string."
+                  enum: ['VDAB',
+                         'OCMW']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+
       required:
         - '@id'
         - '@type'
 
     GeregistreerdeOrganisatie:
       type: object
+      description: 'Organisatie met een juridisch statuut vastgelegd door registratie. Vergelijk met een FormeleOrganisatie waarbij dit statuut ook op een andere manier verkregen kan zijn.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['GeregistreerdeOrganisatie']
         GeregistreerdeOrganisatie.voorkeursnaam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
-        PubliekeOrganisatie.registratie:
+          type: object
+          description: 'Naam waarmee de Organisatie bij voorkeur wordt aangeduid'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
+        GeregistreerdeOrganisatie.registratie:
           type: array
           items:
             $ref: '#/components/schemas/Identificator'
           minItems: 0
+        GeregistreerdeOrganisatie.contactinfo:
+          type: array
+          description: 'Informatie zoals email, telefoon... die toelaat de Organisatie te contacteren.'
+          items:
+            $ref: '#/components/schemas/Contactpunt'
+          minItems: 0
+        GeregistreerdeOrganisatie.type:
+          description: 'Het soort Organisatie.'
+          type: object
+          properties:
+            '@id':
+              type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a OrganisatieType enum value URI.'
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB',
+                     'https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  description: "OrganisatieType enum value string."
+                  enum: ['VDAB',
+                         'OCMW']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
       required:
         - '@id'
         - '@type'
 
     Participatie:
       type: object
+      description: 'De rol waarin een Agent deelneemt aan de Publieke Dienstverlening.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['Participatie']
         Participatie.rol:
           type: object
+          description: 'De functie van de Agent bij het deelnemen.'
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Participatietype enum value URI.'
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende',
                      'https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar',
@@ -511,6 +775,7 @@ components:
               properties:
                 '@value':
                   type: string
+                  description: "Participatietype enum value string."
                   enum: ['Werkzoekende',
                          'Bemiddelaar',
                          'Begeleider',
@@ -526,9 +791,11 @@ components:
             - 'SKOS.prefLabel'
         Participatie.heeftParticipant:
           type: object
+          description: 'De Agenten die deelnemen.'
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Participatie instance.'
           required:
               - '@id'
       required:
@@ -537,42 +804,112 @@ components:
 
     PubliekeDienstverlening:
       type: object
+      description: 'Een publieke dienstverlening is een geheel van verplichte of optioneel uitgevoerde of uitvoerbare acties door of in naam van een publieke organisatie. De dienstverlening is ten bate van een individu, een bedrijf, een andere publieke organisatie of groepen.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['PubliekeDienstverlening']
+        PubliekeDienstverlening.naam:
+          type: object
+          description: De naam van de Publieke Dienstverlening.
+          properties:
+            '@value':
+              type: string
+            '@language':
+              type: string
+          required:
+            - '@value'
+            - '@language'
         PubliekeDienstverlening.heeftVerantwoordelijke:
           type: object
+          description: 'De Publieke Organisatie die verantwoordelijk is voor de Publieke Dienstverlening.'
           properties:
              '@id':
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Publieke Organisatie instance.'
               type: string
           required:
             - '@id'
-          minItems: 0
         PubliekeDienstverlening.heeftParticipatie:
           type: array
+          description: 'De Agenten die deelnemen aan de Publieke Dienstverlening.'
           items:
             type: object
             properties:
               '@id':
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Participatie instance.'
+                type: string
+            required:
+              - '@id'
+          minItems: 0
+        PubliekeDienstverlening.gebruikt:
+          type: array
+          description: 'Referenties naar alle Inputs die de Publieke Dienstverlening gebruikt om een of meerdere Outputs te produceren.'
+          items:
+            type: object
+            properties:
+              '@id':
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Werkvoorkeuren instance.'
+                type: string
+            required:
+              - '@id'
+          minItems: 0
+        PubliekeDienstverlening.produceert:
+          type: array
+          description: 'De referenties naar alle resources die de Publieke Dienstverlening produceert.'
+          items:
+            type: object
+            properties:
+              '@id':
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Activeringstraject instance.'
                 type: string
             required:
               - '@id'
           minItems: 0
         PubliekeDienstverlening.type:
           type: object
+          description: 'Het soort Publieke Dienstverlening.'
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a PubliekeDienstverleningType enum value URI.'
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk']
             'SKOS.prefLabel':
               properties:
                 '@value':
                   type: string
+                  description: "PubliekeDienstverleningType enum value string."
                   enum: ['Activering Naar Werk']
+                '@language':
+                  type: string
+                  enum: ['nl']
+              required:
+                - '@value'
+                - '@language'
+          required:
+            - '@id'
+            - 'SKOS.prefLabel'
+        PubliekeDienstverlening.finaliteit:
+          type: object
+          description: 'Wettelijk kader waarvoor de informatie wordt bevraagd.'
+          properties:
+            '@id':
+              type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a FinaliteitType enum value URI.'
+              format: uri
+              enum: ['https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek',
+                     'https://data.vlaanderen.be/id/concept/FinaliteitType/GPMI']
+            'SKOS.prefLabel':
+              properties:
+                '@value':
+                  type: string
+                  description: "FinaliteitType enum value string."
+                  enum: ['Sociaal Onderzoek',
+                         'GPMI']
                 '@language':
                   type: string
                   enum: ['nl']
@@ -585,26 +922,70 @@ components:
       required:
         - '@id'
         - '@type'
+        - PubliekeDienstverlening.heeftVerantwoordelijke
+        - PubliekeDienstverlening.naam
 
     Activeringstraject:
       type: object
+      description: 'Een Activeringstraject is een specifiekere variant van een Traject dat moet aansporen om de Werkzoekende te activeren naar werk.'
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['Activeringstraject']
         Activeringstraject.naam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: 'De naam van een Traject.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
         Activeringstraject.startdatum:
-          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+          type: object
+          description: 'De datum waarop het Traject start.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal ISO XSD.DateTime value."
+              format: date-time
+            '@type':
+              type: string
+              description: "Literal datatype fixed to XSD's DateTime."
+              enum: ['DateTime']
+          required:
+            - '@value'
+            - '@type'
         Activeringstraject.einddatum:
-          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+          type: object
+          description: 'De datum waarop het Traject eindigt.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal ISO XSD.DateTime value."
+              format: date-time
+            '@type':
+              type: string
+              description: "Literal datatype fixed to XSD's DateTime."
+              enum: ['DateTime']
+          required:
+            - '@value'
+            - '@type'
         Activeringstraject.status:
           type: object
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a TrajectStatus enum value URI.'
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/TrajectStatus/Actief',
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
@@ -614,6 +995,7 @@ components:
               properties:
                 '@value':
                   type: string
+                  description: "TrajectStatus enum value string."
                   enum: ['Actief',
                          'Stopgezet',
                          'Passief',
@@ -627,12 +1009,19 @@ components:
           required:
             - '@id'
             - 'SKOS.prefLabel'
+        Activeringstraject.deeltraject:
+          type: array
+          description: 'De Deeltrajecten gelinkt aan dit Traject.'
+          items:
+            $ref: '#/components/schemas/Deeltraject'
+          minItems: 0
         Activeringstraject.heeftParticipatie:
           type: array
           items:
             type: object
             properties:
               '@id':
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Participatie instance.'
                 type: string
             required:
               - '@id'
@@ -640,30 +1029,72 @@ components:
       required:
         - '@id'
         - '@type'
+        - Activeringstraject.naam
 
     Deeltraject:
       type: object
       properties:
         '@id':
           type: string
+          description: 'Object ID. Can be an URI or internal reference such as _:MyID.'
         '@type':
           type: string
+          description: "Object type."
           enum: ['Deeltraject']
         Deeltraject.naam:
-          $ref: '#/components/schemas/JsonLdLiteralLanguage'
+          type: object
+          description: 'De naam van een Deeltraject.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
         Deeltraject.startdatum:
-          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+          type: object
+          description: 'De datum waarop het Deeltraject start.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal ISO XSD.DateTime value."
+              format: date-time
+            '@type':
+              type: string
+              description: "Literal datatype fixed to XSD's DateTime."
+              enum: ['DateTime']
+          required:
+            - '@value'
+            - '@type'
         Deeltraject.einddatum:
-          $ref: '#/components/schemas/JsonLdLiteralDateTime'
+          type: object
+          description: 'De datum waarop het Deeltraject eindigt.'
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal ISO XSD.DateTime value."
+              format: date-time
+            '@type':
+              type: string
+              description: "Literal datatype fixed to XSD's DateTime."
+              enum: ['DateTime']
+          required:
+            - '@value'
+            - '@type'
         Deeltraject.type:
           type: object
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Deeltrajecttype enum value URI.'
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding',
                      'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender',
-                     'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Oriëntering']
+                     'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering']
             'SKOS.prefLabel':
               properties:
                 '@value':
@@ -685,6 +1116,7 @@ components:
           properties:
             '@id':
               type: string
+              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a TrajectStatus enum value URI.'
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/TrajectStatus/Actief',
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
@@ -714,6 +1146,7 @@ components:
             properties:
               '@id':
                 type: string
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a TrajectStatus enum value URI.'
             required:
               - '@id'
           minItems: 0
