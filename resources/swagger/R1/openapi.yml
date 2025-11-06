@@ -4,6 +4,7 @@ info:
   description: |-
     KlantVolgSysteem 1.0 uitwisseling tussen VDAB en OCMWs via MAGDA.
     Deze Swagger beschrijft de API voor Release 1.
+    Zonder post.
   version: 1.0.0
 externalDocs:
   description: Contacteer MAGDA via de Servicedesk
