@@ -218,13 +218,13 @@ components:
                 enum: ['https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld']
               - type: object
                 properties:
-                  SKOS.prefLabel:
+                  'SKOS.prefLabel':
                     type: string
                     description: "URI for W3C SKOS Core prefLabel attribute."
                     format: uri
                     enum: ['http://www.w3.org/2004/02/skos/core#prefLabel']
                 required:
-                  - SKOS.prefLabel
+                  - 'SKOS.prefLabel'
         # JSON-LD @graph contains the data objects which is an array with a specific list of possible objects.
         # "@graph": [
         #  ...
@@ -506,7 +506,7 @@ components:
           type: string
           description: "Object type."
           enum: ['Domicilie']
-        Verblijfplaats.verblijfsadres:
+        Domicilie.verblijfsadres:
           type: object
           description: 'Adres dat men kan aanschrijven of bezoeken.'
           properties:
@@ -558,9 +558,10 @@ components:
           description: 'De voorkeuren voor werk van een Persoon.'
           items:
             type: object
-            '@id':
-              type: string
-              description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Werkvoorkeuren instance.'
+            properties:
+              '@id':
+                type: string
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Werkvoorkeuren instance.'
             required:
               - '@id'
           minItems: 0
@@ -815,7 +816,7 @@ components:
           enum: ['PubliekeDienstverlening']
         PubliekeDienstverlening.naam:
           type: object
-          description: De naam van de Publieke Dienstverlening.
+          description: 'De naam van de Publieke Dienstverlening.'
           properties:
             '@value':
               type: string
@@ -1146,9 +1147,10 @@ components:
             properties:
               '@id':
                 type: string
-                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a TrajectStatus enum value URI.'
+                description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Participatie instance.'
             required:
               - '@id'
           minItems: 0
       required:
+        - '@id'
         - '@type'
