@@ -500,13 +500,13 @@ components:
 
     Domicilie:
       type: object
-      description: 'Plaats waar een Persoon al dan niet tijdelijk woont of logeert.'
+      description: 'Plaats waar een Persoon al dan niet tijdelijk woont of logeert. Specifieker type van Verblijfplaats, erft alle attributen over.'
       properties:
         '@type':
           type: string
           description: "Object type."
           enum: ['Domicilie']
-        Domicilie.verblijfsadres:
+        Verblijfplaats.verblijfsadres:
           type: object
           description: 'Adres dat men kan aanschrijven of bezoeken.'
           properties:
