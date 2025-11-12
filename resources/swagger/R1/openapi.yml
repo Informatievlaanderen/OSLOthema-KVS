@@ -36,9 +36,10 @@ paths:
           required: true
           schema:
             type: string
+            pattern: '^\d{11}$'
           examples:
             JanaDeHinde:
-              value: '77501820360'
+              value: '42061467820'
               summary: 'INSZ nummer Jana De Hinde. Dit is een voorbeeld uit de mocking data.'
         - name: Type
           in: path
@@ -56,6 +57,7 @@ paths:
           required: true
           schema:
             type: string
+            format: date-time
           examples:
             Tijdstip001:
               value: '2024-10-15T15:00:00'
