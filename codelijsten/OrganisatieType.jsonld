@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType",
+      "@type": "skos:ConceptScheme",
+      "skos:prefLabel": { "@value": "Conceptscheme type van Organisatie.", "@language": "nl" },
+      "skos:definition": { "@value": "Codelijst voor type van Organisatie.", "@language": "nl" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "VDAB", "@language": "nl" },
+      "skos:definition": { "@value": "Vlaamse Dienst voor Arbeidsbemiddeling en Beroepsopleiding.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "OCMW", "@language": "nl" },
+      "skos:definition": { "@value": "Openbaar Centrum voor Maatschappelijk Welzijn.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType" }
+    }
+  ]
+}

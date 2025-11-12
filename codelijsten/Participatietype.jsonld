@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype",
+      "@type": "skos:ConceptScheme",
+      "skos:prefLabel": { "@value": "Conceptscheme type van Participatie.", "@language": "nl" },
+      "skos:definition": { "@value": "Codelijst voor type van Participatie.", "@language": "nl" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Werkzoekende", "@language": "nl" },
+      "skos:definition": { "@value": "Persoon die op zoek is naar werk.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Bemiddelaar", "@language": "nl" },
+      "skos:definition": { "@value": "Persoon die bemiddelt tijdens een traject.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Begeleider",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Begeleider", "@language": "nl" },
+      "skos:definition": { "@value": "Persoon die begeleiding geeft tijdens een traject.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Contactpersoon",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Contactpersoon", "@language": "nl" },
+      "skos:definition": { "@value": "Persoon die gecontacteerd kan worden voor vragen.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" }
+    }
+  ]
+}

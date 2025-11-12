@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype",
+      "@type": "skos:ConceptScheme",
+      "skos:prefLabel": { "@value": "Conceptscheme type van voorkeuren.", "@language": "nl" },
+      "skos:definition": { "@value": "Codelijst voor type van voorkeuren.", "@language": "nl" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Gewenst Beroep", "@language": "nl" },
+      "skos:definition": { "@value": "Beroep dat gewenst is om uit te voeren.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/TeLerenBeroep",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Te Leren Beroep", "@language": "nl" },
+      "skos:definition": { "@value": "Beroep dat men wilt leren.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Te Verkennen Beroep", "@language": "nl" },
+      "skos:definition": { "@value": "Beroep dat men wilt verkennen.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
+    },
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
+      "@type": "skos:Concept",
+      "skos:prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" },
+      "skos:definition": { "@value": "Beroep dat men niet wilt uitvoeren.", "@language": "nl" },
+      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
+      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
+    }
+  ]
+}
