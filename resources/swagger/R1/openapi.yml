@@ -39,7 +39,7 @@ paths:
           examples:
             JanaDeHinde:
               value: '77501820360'
-              summary: INSZ nummer Jana De Hinde
+              summary: 'INSZ nummer Jana De Hinde. Dit is een voorbeeld uit de mocking data.'
         - name: Type
           in: path
           description: 'Type van de Dienstverlening.'
