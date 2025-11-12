@@ -1,45 +1,45 @@
 {
   "@context": {
-    "skos": "http://www.w3.org/2004/02/skos/core#"
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
   },
   "@graph": [
     {
       "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype",
-      "@type": "skos:ConceptScheme",
-      "skos:prefLabel": { "@value": "Conceptscheme type van de status van een traject.", "@language": "nl" },
-      "skos:definition": { "@value": "Codelijst voor type van de status van een traject.", "@language": "nl" }
+      "@type": "SKOS:ConceptScheme",
+      "SKOS:prefLabel": { "@value": "Conceptscheme type van de status van een traject.", "@language": "nl" },
+      "SKOS:definition": { "@value": "Codelijst voor type van de status van een traject.", "@language": "nl" }
     },
     {
       "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Actief",
-      "@type": "skos:Concept",
-      "skos:prefLabel": { "@value": "Actief", "@language": "nl" },
-      "skos:definition": { "@value": "Traject dat lopend is.", "@language": "nl" },
-      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
-      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Actief", "@language": "nl" },
+      "SKOS:definition": { "@value": "Traject dat lopend is.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
     },
     {
       "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Stopgezet",
-      "@type": "skos:Concept",
-      "skos:prefLabel": { "@value": "Stopgezet", "@language": "nl" },
-      "skos:definition": { "@value": "Traject dat werd stopgezet.", "@language": "nl" },
-      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
-      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Stopgezet", "@language": "nl" },
+      "SKOS:definition": { "@value": "Traject dat werd stopgezet.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
     },
     {
       "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Passief",
-      "@type": "skos:Concept",
-      "skos:prefLabel": { "@value": "Passief", "@language": "nl" },
-      "skos:definition": { "@value": "Traject dat passief lopend is.", "@language": "nl" },
-      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
-      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Passief", "@language": "nl" },
+      "SKOS:definition": { "@value": "Traject dat passief lopend is.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
     },
     {
       "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd",
-      "@type": "skos:Concept",
-      "skos:prefLabel": { "@value": "Uitgevoerd", "@language": "nl" },
-      "skos:definition": { "@value": "Traject dat uitgevoerd en afgesloten is.", "@language": "nl" },
-      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
-      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Uitgevoerd", "@language": "nl" },
+      "SKOS:definition": { "@value": "Traject dat uitgevoerd en afgesloten is.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
     }
   ]
 }

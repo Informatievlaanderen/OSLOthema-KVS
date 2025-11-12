@@ -1,29 +1,29 @@
 {
   "@context": {
-    "skos": "http://www.w3.org/2004/02/skos/core#"
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
   },
   "@graph": [
     {
       "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType",
-      "@type": "skos:ConceptScheme",
-      "skos:prefLabel": { "@value": "Conceptscheme type van Finaliteit.", "@language": "nl" },
-      "skos:definition": { "@value": "Codelijst voor type van Finaliteit.", "@language": "nl" }
+      "@type": "SKOS:ConceptScheme",
+      "SKOS:prefLabel": { "@value": "Conceptscheme type van Finaliteit.", "@language": "nl" },
+      "SKOS:definition": { "@value": "Codelijst voor type van Finaliteit.", "@language": "nl" }
     },
     {
       "@id": "https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek",
-      "@type": "skos:Concept",
-      "skos:prefLabel": { "@value": "Sociaal Onderzoek", "@language": "nl" },
-      "skos:definition": { "@value": "Onderzoek van de sociale situatie van een persoon.", "@language": "nl" },
-      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" },
-      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" }
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Sociaal Onderzoek", "@language": "nl" },
+      "SKOS:definition": { "@value": "Onderzoek van de sociale situatie van een persoon.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" }
     },
     {
       "@id": "https://data.vlaanderen.be/id/concept/FinaliteitType/GPMI",
-      "@type": "skos:Concept",
-      "skos:prefLabel": { "@value": "GPMI", "@language": "nl" },
-      "skos:definition": { "@value": "GPMI", "@language": "nl" },
-      "skos:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" },
-      "skos:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" }
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "GPMI", "@language": "nl" },
+      "SKOS:definition": { "@value": "GPMI", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" }
     }
   ]
 }
