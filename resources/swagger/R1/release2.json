@@ -33,11 +33,19 @@
             "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
             "SKOS.prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" }
           }
+        },
+        {
+          "@type": "Beroepstoestand",
+          "Beroepstoestand.naam": { "@value": "Installateur Gasketels", "@language": "nl" },
+          "Beroepstoestand.voorkeur": {
+            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
+            "SKOS.prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" }
+          }
         }
      ]
     },
     {
-      "@id": "_:Persoon42061467820Verblijfplaats",
+      "@id": "_:JanaDeHindeVerblijfplaats",
       "@type": "Adresvoorstelling",
       "Adresvoorstelling.straatnaam": { "@value": "Over Het Waterstraat", "@language": "nl" },
       "Adresvoorstelling.huisnummer": { "@value": "12" },
@@ -46,7 +54,16 @@
       "Adresvoorstelling.land": { "@value": "België", "@language": "nl" }
     },
     {
-      "@id": "_:Persoon42061467820",
+      "@id": "_:JanaDeHindeDomicilie",
+      "@type": "Adresvoorstelling",
+      "Adresvoorstelling.straatnaam": { "@value": "Begijnhof", "@language": "nl" },
+      "Adresvoorstelling.huisnummer": { "@value": "874" },
+      "Adresvoorstelling.postcode": { "@value": "020" },
+      "Adresvoorstelling.gemeentenaam": { "@value": "Amsterdam", "@language": "nl" },
+      "Adresvoorstelling.land": { "@value": "Nederland", "@language": "nl" }
+    },
+    {
+      "@id": "_:JanaDeHinde",
       "@type": "GeregistreerdPersoon",
       "GeregistreerdPersoon.registratie": [
         {
@@ -55,6 +72,24 @@
           "Identificator.toegekendDoor(String)": "Rijksregister"
         }
       ],
+      "GeregistreerdPersoon.inwonerschap": [
+        {
+          "@type": "Inwonerschap",
+          "Inwonerschap.heeftVerblijfplaats": {
+            "@type": "Verblijfplaats",
+            "Verblijfplaats.verblijfsadres":  { "@id": "_:JanaDeHindeVerblijfplaats" }
+          }
+        },
+        {
+          "@type": "Inwonerschap",
+          "Inwonerschap.heeftVerblijfplaats": {
+            "@type": "Domicilie",
+            "Verblijfplaats.verblijfsadres":  { "@id": "_:JanaDeHindeDomicilie" }
+          }
+        }
+      ],
+      "GeregistreerdPersoon.voornaam": "Jana",
+      "GeregistreerdPersoon.achternaam": "De Hinde",
       "GeregistreerdPersoon.werkvoorkeuren": [ { "@id": "_:Werkvoorkeuren" } ],
       "GeregistreerdPersoon.contactinfo": [
         {
@@ -67,7 +102,7 @@
         },
         {
           "@type": "Contactpunt",
-          "Contactpunt.adres": { "@id": "_:Persoon42061467820Verblijfplaats" }
+          "Contactpunt.adres": { "@id": "_:JanaDeHindeVerblijfplaats" }
         },
         {
           "@type": "Contactpunt",
@@ -76,7 +111,7 @@
       ]
     },
     {
-      "@id": "_:PersoonJanVanDenBemiddelinghe",
+      "@id": "_:JanVanDenBemiddelinghe",
       "@type": "Persoon",
       "Persoon.voornaam": "Jan",
       "Persoon.achternaam": "Vanden Bemiddelinghe",
@@ -92,19 +127,51 @@
       ]
     },
     {
-      "@id": "_:Organisatie2.144.097.205",
+       "@id": "_:VDABAdresvoorstelling",
+       "@type": "Adresvoorstelling",
+       "Adresvoorstelling.straatnaam": { "@value": "Somersstraat", "@language": "nl" },
+       "Adresvoorstelling.huisnummer": { "@value": "22" },
+       "Adresvoorstelling.postcode": { "@value": "2018" },
+       "Adresvoorstelling.gemeentenaam": { "@value": "Antwerpen", "@language": "nl" },
+       "Adresvoorstelling.land": { "@value": "België", "@language": "nl" }
+    },
+    {
+      "@id": "_:VDAB",
       "@type": "PubliekeOrganisatie",
+      "PubliekeOrganisatie.voorkeursnaam": {
+        "@value": "Vlaamse Dienst voor Arbeidsbemiddeling en Beroepsopleiding",
+        "@language": "nl"
+      },
+      "PubliekeOrganisatie.contactinfo": [
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.adres": { "@id": "_:VDABAdresvoorstelling" }
+        }
+      ],
       "PubliekeOrganisatie.identificator": [
         {
           "@type": "Identificator",
           "Identificator.identificator": "2.144.097.205",
           "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
+        },
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "OVO000078",
+          "Identificator.toegekendDoor(String)": "Organisatieregister"
         }
-      ]
+      ],
+      "PubliekeOrganisatie.type": {
+        "@id": "https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB",
+        "SKOS.prefLabel": { "@value": "VDAB", "@language": "nl" }
+      }
     },
     {
-      "@id": "_:Organisatie1234.567.891",
+      "@id": "_:LoodgieterJohnnyBVBA",
       "@type": "GeregistreerdeOrganisatie",
+      "GeregistreerdeOrganisatie.voorkeursnaam": {
+        "@value": "Loodgieter Johnny",
+        "@language": "nl"
+      },
       "GeregistreerdeOrganisatie.registratie": [
         {
           "@type": "Identificator",
@@ -114,8 +181,27 @@
       ]
     },
     {
-      "@id": "_:Organisatie0410.797.275",
+      "@id": "_:SyntraABAdresvoorstelling",
+      "@type": "Adresvoorstelling",
+      "Adresvoorstelling.straatnaam": { "@value": "Borsbeeksebrug", "@language": "nl" },
+      "Adresvoorstelling.huisnummer": { "@value": "32" },
+      "Adresvoorstelling.postcode": { "@value": "2600" },
+      "Adresvoorstelling.gemeentenaam": { "@value": "Antwerpen", "@language": "nl" },
+      "Adresvoorstelling.land": { "@value": "België", "@language": "nl" }
+    },
+    {
+      "@id": "_:SyntraAB",
       "@type": "GeregistreerdeOrganisatie",
+      "GeregistreerdeOrganisatie.voorkeursnaam": {
+        "@value": "Syntra AB",
+        "@language": "nl"
+      },
+      "GeregistreerdeOrganisatie.contactinfo": [
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.adres": { "@id": "_:SyntraABAdresvoorstelling" }
+        }
+      ],
       "GeregistreerdeOrganisatie.registratie": [
         {
           "@type": "Identificator",
@@ -131,7 +217,7 @@
         "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende",
         "SKOS.prefLabel": { "@value": "Werkzoekende", "@language": "nl" }
       },
-      "Participatie.heeftParticipant": { "@id": "_:Persoon42061467820" }
+      "Participatie.heeftParticipant": { "@id": "_:JanaDeHinde" }
     },
     {
       "@id": "_:Participatie002",
@@ -149,12 +235,12 @@
         "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar",
         "SKOS.prefLabel": { "@value": "Bemiddelaar", "@language": "nl" }
       },
-      "Participatie.heeftParticipant": { "@id": "_:Organisatie2.144.097.205" }
+      "Participatie.heeftParticipant": { "@id": "_:VDAB" }
     },
     {
-      "@id": "_:DienstverleningActiveringNaarWerk001",
+      "@id": "_:DienstverleningActiveringNaarWerk",
       "@type": "PubliekeDienstverlening",
-      "PubliekeDienstverlening.heeftVerantwoordelijke": { "@id": "_:Organisatie2.144.097.205" },
+      "PubliekeDienstverlening.heeftVerantwoordelijke": { "@id": "_:VDAB" },
       "PubliekeDienstverlening.finaliteit": {
         "@id": "https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek",
         "SKOS.prefLabel": { "@value": "Sociaal Onderzoek", "@language": "nl" }
@@ -170,9 +256,9 @@
         { "@id": "_:Traject" }
       ],
       "PubliekeDienstverlening.heeftParticipatie": [
-        { "@id": "_:Persoon42061467820" },
+        { "@id": "_:JanaDeHinde" },
         { "@id": "_:JanVanDenBemiddelinghe" },
-        { "@id": "_:Organisatie2.144.097.205" }
+        { "@id": "_:VDAB" }
       ],
       "PubliekeDienstverlening.type": {
         "@id": "https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk",
@@ -196,9 +282,9 @@
         "SKOS.prefLabel": { "@value": "Uitgevoerd", "@language": "nl" }
       },
       "Activeringstraject.heeftParticipatie": [
-        { "@id": "_:Persoon42061467820" },
+        { "@id": "_:JanaDeHinde" },
         { "@id": "_:JanVanDenBemiddelinghe" },
-        { "@id": "_:Organisatie2.144.097.205" }
+        { "@id": "_:VDAB" }
       ],
       "Activeringstraject.deeltraject": [
         {
@@ -222,8 +308,8 @@
             "SKOS.prefLabel": { "@value": "Uitgevoerd", "@language": "nl" }
           },
           "Deeltraject.heeftParticipatie": [
-            { "@id": "_:Persoon42061467820" },
-            { "@id": "_:Organisatie0410.797.275" }
+            { "@id": "_:JanaDeHinde" },
+            { "@id": "_:SyntraAB" }
           ]
         },
         {
@@ -247,8 +333,8 @@
             "SKOS.prefLabel": { "@value": "Uitgevoerd", "@language": "nl" }
           },
           "Deeltraject.heeftParticipatie": [
-            { "@id": "_:Persoon42061467820" },
-            { "@id": "_:Organisatie1234.567.891" }
+            { "@id": "_:JanaDeHinde" },
+            { "@id": "_:LoodgieterJohnnyBVBA" }
           ]
         }
       ]

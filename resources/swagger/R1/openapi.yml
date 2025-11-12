@@ -15,7 +15,7 @@ tags:
   - name: Dienstverlening
     description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
 paths:
-  /v1/dienstverleningen/{Type}:
+  /v1/dienstverleningen:
     get:
       tags:
         - Dienstverlening
@@ -41,27 +41,6 @@ paths:
             JanaDeHinde:
               value: '42061467820'
               summary: 'INSZ nummer Jana De Hinde. Dit is een voorbeeld uit de mocking data.'
-        - name: Type
-          in: path
-          description: 'Type van de Dienstverlening.'
-          required: true
-          schema:
-            type: string
-          examples:
-            Dienstverlening001:
-              value: 'ActiveringNaarWerk'
-              summary: Dienstverlening Activering Naar Werk
-        - name: tijdstip
-          in: query
-          description: 'Tijdstip wanneer de dienstverlening heeft plaatsgevonden.'
-          required: true
-          schema:
-            type: string
-            format: date-time
-          examples:
-            Tijdstip001:
-              value: '2024-10-15T15:00:00'
-              summary: 2024-10-15T15:00:00
       responses:
         '200':
           description: Opvraging succesvol.
@@ -71,15 +50,21 @@ paths:
                 $ref: "#/components/schemas/JsonLdRoot"
               examples:
                 Dienstverlening001:
-                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
+                  summary: 'Referenties met Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
+                Dienstverlening002:
+                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release2.json
             application/json:
               schema:
                 $ref: "#/components/schemas/JsonLdRoot"
               examples:
                 Dienstverlening001:
-                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
+                  summary: 'Referenties met Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
+                Dienstverlening002:
+                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release2.json
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -749,6 +734,7 @@ components:
       required:
         - '@id'
         - '@type'
+        - GeregistreerdeOrganisatie.registratie
 
     Participatie:
       type: object
