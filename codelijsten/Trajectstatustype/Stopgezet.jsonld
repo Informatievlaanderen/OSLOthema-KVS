@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Stopgezet",
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Stopgezet", "@language": "nl" },
+      "SKOS:definition": { "@value": "Traject dat werd stopgezet.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype" }
+    }
+  ]
+}

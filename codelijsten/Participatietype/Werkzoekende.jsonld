@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende",
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Werkzoekende", "@language": "nl" },
+      "SKOS:definition": { "@value": "Persoon die op zoek is naar werk.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Participatietype" }
+    }
+  ]
+}

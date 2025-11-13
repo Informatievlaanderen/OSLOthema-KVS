@@ -8,30 +8,6 @@
       "@type": "SKOS:ConceptScheme",
       "SKOS:prefLabel": { "@value": "Conceptscheme type van deeltrajecten.", "@language": "nl" },
       "SKOS:definition": { "@value": "Codelijst voor type van deeltrajecten.", "@language": "nl" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Opleiding", "@language": "nl" },
-      "SKOS:definition": { "@value": "Deeltraject waarin een opleiding gevolgd is.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Oriëntering", "@language": "nl" },
-      "SKOS:definition": { "@value": "Deeltraject waarin men verschillende beroepen verkent.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Tender", "@language": "nl" },
-      "SKOS:definition": { "@value": "Deeltraject waarin men een inschrijft om een beroep te verkrijgen.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" }
     }
   ]
 }

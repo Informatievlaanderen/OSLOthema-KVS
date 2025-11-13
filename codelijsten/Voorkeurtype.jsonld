@@ -8,38 +8,6 @@
       "@type": "SKOS:ConceptScheme",
       "SKOS:prefLabel": { "@value": "Conceptscheme type van voorkeuren.", "@language": "nl" },
       "SKOS:definition": { "@value": "Codelijst voor type van voorkeuren.", "@language": "nl" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Gewenst Beroep", "@language": "nl" },
-      "SKOS:definition": { "@value": "Beroep dat gewenst is om uit te voeren.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/TeLerenBeroep",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Te Leren Beroep", "@language": "nl" },
-      "SKOS:definition": { "@value": "Beroep dat men wilt leren.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Te Verkennen Beroep", "@language": "nl" },
-      "SKOS:definition": { "@value": "Beroep dat men wilt verkennen.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" },
-      "SKOS:definition": { "@value": "Beroep dat men niet wilt uitvoeren.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
     }
   ]
 }

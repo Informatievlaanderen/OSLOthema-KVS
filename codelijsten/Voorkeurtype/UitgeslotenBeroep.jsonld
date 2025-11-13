@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep",
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Uitgesloten Beroep", "@language": "nl" },
+      "SKOS:definition": { "@value": "Beroep dat men niet wilt uitvoeren.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Voorkeurtype" }
+    }
+  ]
+}

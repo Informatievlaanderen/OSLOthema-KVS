@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek",
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Sociaal Onderzoek", "@language": "nl" },
+      "SKOS:definition": { "@value": "Onderzoek van de sociale situatie van een persoon.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/FinaliteitType" }
+    }
+  ]
+}

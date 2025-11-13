@@ -8,14 +8,6 @@
       "@type": "SKOS:ConceptScheme",
       "SKOS:prefLabel": { "@value": "Conceptscheme type van Publieke Dienstverleningen.", "@language": "nl" },
       "SKOS:definition": { "@value": "Codelijst voor type van Publieke Dienstverleningen.", "@language": "nl" }
-    },
-    {
-      "@id": "https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/Werkzoekende",
-      "@type": "SKOS:Concept",
-      "SKOS:prefLabel": { "@value": "ActiveringNaarWerk", "@language": "nl" },
-      "SKOS:definition": { "@value": "Activering Naar Werk.", "@language": "nl" },
-      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/PubliekeDienstverleningType" },
-      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/PubliekeDienstverleningType" }
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender",
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "Tender", "@language": "nl" },
+      "SKOS:definition": { "@value": "Deeltraject waarin men een inschrijft om een beroep te verkrijgen.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype" }
+    }
+  ]
+}

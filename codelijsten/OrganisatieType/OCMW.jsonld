@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
+  },
+  "@graph": [
+    {
+      "@id": "https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW",
+      "@type": "SKOS:Concept",
+      "SKOS:prefLabel": { "@value": "OCMW", "@language": "nl" },
+      "SKOS:definition": { "@value": "Openbaar Centrum voor Maatschappelijk Welzijn.", "@language": "nl" },
+      "SKOS:inscheme": { "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType" },
+      "SKOS:topConceptOf": { "@id": "https://data.vlaanderen.be/id/conceptscheme/OrganisatieType" }
+    }
+  ]
+}
