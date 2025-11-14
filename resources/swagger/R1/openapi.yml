@@ -10,11 +10,50 @@ externalDocs:
   description: Contacteer MAGDA via de Servicedesk
   url: https://vlaamseoverheid.atlassian.net/servicedesk/customer/portal/9/group/125/create/471
 servers:
-  - url: https://magda.vlaanderen.be
+  - url: http://localhost:8000
+  - url: https://data.vlaanderen.be
 tags:
   - name: Dienstverlening
     description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
+  - name: SKOS
+    description: 'SKOS Concept service.'
 paths:
+  /id/concept/{Conceptscheme}/{Concept}:
+    get:
+      tags:
+        - SKOS
+      servers:
+        - url: https://data.vlaanderen.be
+          description: "data.vlaanderen.be ID resolving service"
+      parameters:
+        - name: Conceptscheme
+          in: path
+          description: Conceptscheme dat opgevraagd moet worden.
+          required: true
+          schema:
+            type: string
+          examples:
+            VoorkeurType:
+              value: 'VoorkeurType'
+              summary: 'Conceptscheme VookeurType voor een bepaald beroep.'
+        - name: Concept
+          in: path
+          description: Concept dat opgevraagd moet worden.
+          required: true
+          schema:
+            type: string
+          examples:
+            VoorkeurType:
+              value: 'TeVerkennnenBeroep'
+              summary: 'Concept Te Verkennen Beroep.'
+      responses:
+        '200':
+          description: Opvraging successvol.
+          content:
+            application/ld+json:
+              schema:
+                $ref: "#/components/schemas/JsonLdRoot"
+
   /v1/dienstverleningen:
     get:
       tags:
@@ -65,6 +104,14 @@ paths:
                 Dienstverlening002:
                   summary: 'Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release2.json
+      x-links:
+        GetSKOSConceptById:
+          operationId: getSKOSConcept
+          parameters:
+            Conceptscheme: 'DeeltrajectType'
+            Concept: 'Opleiding'
+            Accept: 'application/ld+json'
+
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -183,6 +230,98 @@ components:
           type: string
           description: "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if de-referenced."
       description: "A representation of a generic error message."
+
+    JsonLdRootConcept:
+      type: object
+      properties:
+        '@context':
+          type: object
+          description: "JSON-LD's context which defines how the JSON-LD keys are mapped to URIs."
+          properties:
+            'SKOS':
+              type: string
+              format: uri
+              description: "W3C SKOS vocabulary URI."
+              enum: ['http://www.w3.org/2004/02/skos/core#']
+        '@graph':
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/DeeltrajectConcept"
+
+    DeeltrajectConcept:
+      type: object
+      description: "Deeltraject soort"
+      properties:
+        '@id':
+          type: string
+          format: uri
+          enum: [
+            'https://data.vlaanderen.be/id/conceptscheme/Deeltrajecttype',
+            'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding',
+            'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering',
+            'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender'
+          ]
+          description: 'URI dat het Concept uniek refereert.'
+        '@type':
+          type: string
+          description: "Object type."
+          enum: ['SKOS:Concept', 'SKOS:ConceptScheme']
+        'SKOS.prefLabel':
+          type: object
+          description: "Label van het concept."
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
+        'SKOS.definition':
+          type: object
+          description: "Definitie van het concept."
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+          required:
+            - '@value'
+            - '@language'
+        'SKOS.inscheme':
+          type: object
+          description: "Verwijzing naar waar het Concept onderdeel van is."
+          properties:
+            '@id':
+              type: string
+              format: uri
+              description: "URI die naar het conceptschema verwijst."
+          required:
+            - '@id'
+        'SKOS.topConceptOf':
+          type: object
+          description: "Verwijzing naar waar het meest abstracte concept van dit concept."
+          properties:
+            '@id':
+              type: string
+              format: uri
+              description: "URI die naar het top concept verwijst."
+          required:
+            - '@id'
+      required:
+        - '@id'
+        - '@type'
+        - 'SKOS.prefLabel'
+        - 'SKOS.definition'
+
+
 
     JsonLdRoot:
       type: object
@@ -1084,22 +1223,8 @@ components:
               enum: ['https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding',
                      'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender',
                      'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  enum: ['Opleiding',
-                         'Tender',
-                         'Oriëntering']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
         Deeltraject.status:
           type: object
           properties:
