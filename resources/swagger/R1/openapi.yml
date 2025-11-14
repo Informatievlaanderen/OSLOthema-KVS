@@ -15,7 +15,7 @@ tags:
   - name: Dienstverlening
     description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
   - name: SKOS
-    description: 'De resolver dienst om SKOS URIs te resolven en alle informatie over SKOS Concepts op te vragen.'
+    description: 'De resolver dienst om SKOS URIs te resolven en alle informatie over SKOS Concepts op te vragen. Server is https://data.vlaanderen.be/'
 paths:
   /id/concept/{ConceptScheme}:
     get:
@@ -138,6 +138,10 @@ paths:
           schema:
             type: string
             format: uuid
+          examples:
+            RandomUUID:
+              value: '568ff498-e468-4ca9-9633-2e2473bd8904'
+              summary: 'Random UUID value'
         - name: X-INSZ
           in: header
           description: 'INSZ code van de Werkzoekende.'
