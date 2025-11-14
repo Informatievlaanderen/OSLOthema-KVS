@@ -1,7 +1,7 @@
 {
-  "@context": {
-    "SKOS": "http://www.w3.org/2004/02/SKOS/core#"
-  },
+  "@context": [
+    { "SKOS": "http://www.w3.org/2004/02/SKOS/core#" }
+  ],
   "@graph": [
     {
       "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar",

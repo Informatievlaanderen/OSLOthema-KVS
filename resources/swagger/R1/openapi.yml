@@ -14,7 +14,115 @@ servers:
 tags:
   - name: Dienstverlening
     description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
+  - name: SKOS
+    description: 'De resolver dienst om SKOS URIs te resolven en alle informatie over SKOS Concepts op te vragen.'
 paths:
+  /id/concept/{ConceptScheme}:
+    get:
+      tags:
+        - SKOS
+      servers:
+        - url: https://data.vlaanderen.be
+          description: 'Data Vlaanderen server.'
+      summary: SKOS ConceptScheme opvragen.
+      description: Vraag het schema op van de SKOS concepten.
+      parameters:
+        - name: ConceptScheme
+          description: 'Naam van het SKOS ConceptScheme'
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            FinaliteitType:
+              value: 'FinaliteitType'
+              description: 'Type finaliteit'
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                $ref: "#/components/schemas/JsonLdRoot"
+              examples:
+                SKOSConceptSchemeFinaliteitType:
+                  summary: 'FinaliteitType SKOS ConceptScheme'
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/finaliteittype.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/InvalidAuthorization'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/UnexpectedServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
+  /id/concept/{ConceptScheme}/{Concept}:
+    get:
+      tags:
+        - SKOS
+      servers:
+        - url: https://data.vlaanderen.be
+          description: 'Data Vlaanderen server.'
+      summary: SKOS Concept opvragen.
+      description: Vraag het label, de definitie en URI op van een SKOS Concept.
+      parameters:
+        - name: ConceptScheme
+          description: 'Naam van het SKOS ConceptScheme'
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            FinaliteitType:
+              value: 'FinaliteitType'
+              description: 'Type finaliteit'
+        - name: Concept
+          description: 'Naam van het SKOS Concept.'
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            GPMI:
+              value: 'GPMI'
+              description: 'GPMI'
+      responses:
+        '200':
+          description: Opvraging succesvol.
+          content:
+            application/ld+json:
+              schema:
+                $ref: "#/components/schemas/JsonLdRoot"
+              examples:
+                SKOSConceptGPMI:
+                  summary: 'GPMI SKOS Concept'
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/gpmi.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/InvalidAuthorization'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/UnexpectedServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
   /v1/dienstverleningen:
     get:
       tags:
@@ -198,20 +306,18 @@ components:
           type: array
           description: "JSON-LD's context which defines how the JSON-LD keys are mapped to URIs."
           items:
-            oneOf:
+            anyOf:
               - type: string
                 format: uri
                 description: "JSON-LD's external contexts as URIs."
                 enum: ['https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld']
               - type: object
                 properties:
-                  'SKOS.prefLabel':
+                  'SKOS':
                     type: string
-                    description: "URI for W3C SKOS Core prefLabel attribute."
+                    description: 'URI for W3C SKOS vocabulary'
                     format: uri
-                    enum: ['http://www.w3.org/2004/02/skos/core#prefLabel']
-                required:
-                  - 'SKOS.prefLabel'
+                    enum: ['http://www.w3.org/2004/02/SKOS/core#']
         # JSON-LD @graph contains the data objects which is an array with a specific list of possible objects.
         # "@graph": [
         #  ...
@@ -232,7 +338,99 @@ components:
               - $ref: "#/components/schemas/Verblijfplaats"
               - $ref: "#/components/schemas/Domicilie"
               - $ref: "#/components/schemas/Adresvoorstelling"
+              - $ref: "#/components/schemas/SKOSConcept"
+              - $ref: "#/components/schemas/SKOSConceptScheme"
           minItems: 0
+
+    SKOSConcept:
+      type: object
+      description: "SKOS Concept."
+      properties:
+        '@id':
+          type: string
+          format: uri
+          description: 'URI van het Concept.'
+        '@type':
+          type: string
+          description: "Object type."
+          enum: ['SKOS:Concept']
+        'SKOS:prefLabel':
+          type: object
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+        'SKOS:definition':
+          type: object
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+        'SKOS:inscheme':
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+        'SKOS:topConceptOf':
+          type: object
+          properties:
+            '@id':
+              type: string
+              format: uri
+      required:
+        - '@id'
+        - '@type'
+        - 'SKOS:prefLabel'
+        - 'SKOS:definition'
+        - 'SKOS:inscheme'
+        - 'SKOS:topConceptOf'
+
+    SKOSConceptScheme:
+      type: object
+      description: "SKOS ConceptScheme."
+      properties:
+        '@id':
+          type: string
+          format: uri
+          description: 'URI van het ConceptScheme.'
+        '@type':
+          type: string
+          description: "Object type."
+          enum: ['SKOS:ConceptScheme']
+        'SKOS:prefLabel':
+          type: object
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+        'SKOS:definition':
+          type: object
+          properties:
+            '@value':
+              type: string
+              description: "JSON-LD's Literal string value."
+            '@language':
+              type: string
+              description: "The language in which the Literal string is written."
+              enum: ['nl']
+      required:
+        - '@id'
+        - '@type'
+        - 'SKOS:prefLabel'
+        - 'SKOS:definition'
 
     Beroepstoestand:
       type: object
@@ -268,25 +466,8 @@ components:
                      'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep',
                      'http://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep',
                      'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeLerenBeroep']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "Voorkeurtype enum value string."
-                  enum: ['Uitgesloten Beroep',
-                         'Te Verkennen Beroep',
-                         'Gewenst Beroep',
-                         'Te Leren Beroep']
-                '@language':
-                  type: string
-                  description: "Literal's language tag."
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
       required:
         - '@type'
 
@@ -649,22 +830,8 @@ components:
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB',
                      'https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "OrganisatieType enum value string."
-                  enum: ['VDAB',
-                         'OCMW']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
 
       required:
         - '@id'
@@ -716,22 +883,8 @@ components:
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB',
                      'https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "OrganisatieType enum value string."
-                  enum: ['VDAB',
-                         'OCMW']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
       required:
         - '@id'
         - '@type'
@@ -760,24 +913,8 @@ components:
                      'https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar',
                      'https://data.vlaanderen.be/id/concept/Participatietype/Begeleider',
                      'https://data.vlaanderen.be/id/concept/Participatietype/Contactpersoon']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "Participatietype enum value string."
-                  enum: ['Werkzoekende',
-                         'Bemiddelaar',
-                         'Begeleider',
-                         'Contactpersoon']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
         Participatie.heeftParticipant:
           type: object
           description: 'De Agenten die deelnemen.'
@@ -867,21 +1004,8 @@ components:
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a PubliekeDienstverleningType enum value URI.'
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "PubliekeDienstverleningType enum value string."
-                  enum: ['Activering Naar Werk']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
         PubliekeDienstverlening.finaliteit:
           type: object
           description: 'Wettelijk kader waarvoor de informatie wordt bevraagd.'
@@ -892,22 +1016,8 @@ components:
               format: uri
               enum: ['https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek',
                      'https://data.vlaanderen.be/id/concept/FinaliteitType/GPMI']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "FinaliteitType enum value string."
-                  enum: ['Sociaal Onderzoek',
-                         'GPMI']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
       required:
         - '@id'
         - '@type'
@@ -980,24 +1090,8 @@ components:
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Passief',
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  description: "TrajectStatus enum value string."
-                  enum: ['Actief',
-                         'Stopgezet',
-                         'Passief',
-                         'Uitgevoerd']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
         Activeringstraject.deeltraject:
           type: array
           description: 'De Deeltrajecten gelinkt aan dit Traject.'
@@ -1084,22 +1178,8 @@ components:
               enum: ['https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding',
                      'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Tender',
                      'https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  enum: ['Opleiding',
-                         'Tender',
-                         'Oriëntering']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
         Deeltraject.status:
           type: object
           properties:
@@ -1111,23 +1191,8 @@ components:
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Passief',
                      'https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd']
-            'SKOS.prefLabel':
-              properties:
-                '@value':
-                  type: string
-                  enum: ['Actief',
-                         'Stopgezet',
-                         'Passief',
-                         'Uitgevoerd']
-                '@language':
-                  type: string
-                  enum: ['nl']
-              required:
-                - '@value'
-                - '@language'
           required:
             - '@id'
-            - 'SKOS.prefLabel'
         Deeltraject.heeftParticipatie:
           type: array
           items:
