@@ -3,7 +3,7 @@ name: Validate URIs
 on: [push]
 
 jobs:
-  copy-configuration-files:
+  validate-uris:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
