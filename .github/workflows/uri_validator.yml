@@ -36,7 +36,7 @@ jobs:
         id: validate
         shell: bash
         run: |
-          source/.github/workflows/test.sh
+          source/test/test.sh
       - name: Log validation result to summary
         run: |
           echo "# Summary" >> $GITHUB_STEP_SUMMARY
