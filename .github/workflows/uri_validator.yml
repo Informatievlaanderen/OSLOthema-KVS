@@ -26,7 +26,7 @@ jobs:
         id: validate
         shell: bash
         run: |
-          ./source/tests/test.sh
+          sh ./source/tests/test.sh
       - name: Log validation result to summary
         run: |
           echo "# Summary" >> $GITHUB_STEP_SUMMARY
