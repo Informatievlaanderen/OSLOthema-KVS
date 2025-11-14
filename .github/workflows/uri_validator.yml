@@ -1,0 +1,47 @@
+name: Validate URIs
+
+on: [push]
+
+jobs:
+  copy-configuration-files:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        # Different Node versions possible. Each node version will trigger the action
+        node-version:
+          - 22.x
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          # The source folder contains the configuration files
+          path: source
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: main
+          path: target
+      # Extra step to debug the file structure
+      - name: List file structure of source dir
+        shell: bash
+        run: |
+          ls source
+      - name: List file structure of target dir
+        shell: bash
+        run: |
+          ls target
+      - name: Validate URIs
+        id: validate
+        shell: bash
+        run: |
+          source/.github/workflows/test.sh
+      - name: Log validation result to summary
+        run: |
+          echo "# Summary" >> $GITHUB_STEP_SUMMARY
+          if [ ${{ steps.validate.outputs.success }} == "true" ]; then
+            echo "All configuration file(s) in the repository are valid!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "There are some errors in the configuration file(s). Please check the logs to see which files" >> $GITHUB_STEP_SUMMARY
+          fi
