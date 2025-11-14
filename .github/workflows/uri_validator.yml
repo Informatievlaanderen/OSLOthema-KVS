@@ -17,26 +17,16 @@ jobs:
         with:
           # The source folder contains the configuration files
           path: source
-      - name: Checkout target branch
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}
-          ref: main
-          path: target
       # Extra step to debug the file structure
       - name: List file structure of source dir
         shell: bash
         run: |
           ls source
-      - name: List file structure of target dir
-        shell: bash
-        run: |
-          ls target
       - name: Validate URIs
         id: validate
         shell: bash
         run: |
-          source/test/test.sh
+          ./source/tests/test.sh
       - name: Log validation result to summary
         run: |
           echo "# Summary" >> $GITHUB_STEP_SUMMARY
