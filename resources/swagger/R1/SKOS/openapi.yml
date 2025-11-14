@@ -39,6 +39,7 @@ paths:
               examples:
                 SKOSConceptSchemeFinaliteitType:
                   summary: 'FinaliteitType SKOS ConceptScheme'
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/finaliteittype.json
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -93,6 +94,7 @@ paths:
               examples:
                 SKOSConceptGPMI:
                   summary: 'GPMI SKOS Concept'
+                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/gpmi.json
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
