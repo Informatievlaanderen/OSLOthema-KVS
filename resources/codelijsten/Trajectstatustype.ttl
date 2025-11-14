@@ -1,0 +1,34 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype>
+    a skos:ConceptScheme ;
+    skos:prefLabel "Conceptscheme type van de status van een traject."@nl ;
+    skos:definition "Codelijst voor type van de status van een traject."@nl .
+
+<https://data.vlaanderen.be/id/concept/Trajectstatustype/Actief>
+    a skos:Concept ;
+    skos:prefLabel "Actief"@nl ;
+    skos:definition "Traject dat lopend is."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> .
+
+<https://data.vlaanderen.be/id/concept/Trajectstatustype/Stopgezet>
+    a skos:Concept ;
+    skos:prefLabel "Stopgezet"@nl ;
+    skos:definition "Traject dat werd stopgezet."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> .
+
+<https://data.vlaanderen.be/id/concept/Trajectstatustype/Passief>
+    a skos:Concept ;
+    skos:prefLabel "Passief"@nl ;
+    skos:definition "Traject dat passief lopend is."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> .
+
+<https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd>
+    a skos:Concept ;
+    skos:prefLabel "Uitgevoerd"@nl ;
+    skos:definition "Traject dat uitgevoerd en afgesloten is."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/Trajectstatustype> .

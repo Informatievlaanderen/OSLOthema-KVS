@@ -1,0 +1,20 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://data.vlaanderen.be/id/conceptscheme/FinaliteitType>
+    a skos:ConceptScheme ;
+    skos:prefLabel "Conceptscheme type van Finaliteit."@nl ;
+    skos:definition "Codelijst voor type van Finaliteit."@nl .
+
+<https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek>
+    a skos:Concept ;
+    skos:prefLabel "Sociaal Onderzoek"@nl ;
+    skos:definition "Onderzoek van de sociale situatie van een persoon."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/FinaliteitType> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/FinaliteitType> .
+
+<https://data.vlaanderen.be/id/concept/FinaliteitType/GPMI>
+    a skos:Concept ;
+    skos:prefLabel "GPMI"@nl ;
+    skos:definition "GPMI."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/FinaliteitType> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/FinaliteitType> .

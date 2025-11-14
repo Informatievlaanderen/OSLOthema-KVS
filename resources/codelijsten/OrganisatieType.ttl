@@ -1,0 +1,20 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://data.vlaanderen.be/id/conceptscheme/OrganisatieType>
+    a skos:ConceptScheme ;
+    skos:prefLabel "Conceptscheme type van Organisatie."@nl ;
+    skos:definition "Codelijst voor type van Organisatie."@nl .
+
+<https://data.vlaanderen.be/id/concept/OrganisatieType/VDAB>
+    a skos:Concept ;
+    skos:prefLabel "VDAB"@nl ;
+    skos:definition "Vlaamse Dienst voor Arbeidsbemiddeling en Beroepsopleiding."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/OrganisatieType> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/OrganisatieType> .
+
+<https://data.vlaanderen.be/id/concept/OrganisatieType/OCMW>
+    a skos:Concept ;
+    skos:prefLabel "OCMW"@nl ;
+    skos:definition "Openbaar Centrum voor Maatschappelijk Welzijn."@nl ;
+    skos:inscheme <https://data.vlaanderen.be/id/conceptscheme/OrganisatieType> ;
+    skos:topConceptOf <https://data.vlaanderen.be/id/conceptscheme/OrganisatieType> .
