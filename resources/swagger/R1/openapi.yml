@@ -228,6 +228,9 @@ components:
               - $ref: "#/components/schemas/Domicilie"
               - $ref: "#/components/schemas/Adresvoorstelling"
           minItems: 0
+      required:
+        - '@context'
+        - '@graph'
 
     Beroepstoestand:
       type: object

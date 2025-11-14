@@ -234,6 +234,9 @@ components:
               - $ref: "#/components/schemas/SKOSConcept"
               - $ref: "#/components/schemas/SKOSConceptScheme"
           minItems: 0
+      required:
+        - '@context'
+        - '@graph'
 
     SKOSConcept:
       type: object
