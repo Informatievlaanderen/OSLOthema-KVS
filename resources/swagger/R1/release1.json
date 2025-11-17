@@ -160,9 +160,9 @@
         { "@id": "_:Traject" }
       ],
       "PubliekeDienstverlening.heeftParticipatie": [
-        { "@id": "_:Persoon42061467820" },
-        { "@id": "_:JanVanDenBemiddelinghe" },
-        { "@id": "_:Organisatie2.144.097.205" }
+        { "@id": "_:Participatie001" },
+        { "@id": "_:Participatie002" },
+        { "@id": "_:Participatie003" }
       ],
       "PubliekeDienstverlening.type": {
         "@id": "https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk"
@@ -184,9 +184,9 @@
         "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
       },
       "Activeringstraject.heeftParticipatie": [
-        { "@id": "_:Persoon42061467820" },
-        { "@id": "_:JanVanDenBemiddelinghe" },
-        { "@id": "_:Organisatie2.144.097.205" }
+        { "@id": "_:Participatie001" },
+        { "@id": "_:Participatie002" },
+        { "@id": "_:Participatie003" }
       ],
       "Activeringstraject.deeltraject": [
         {
@@ -208,8 +208,8 @@
             "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
           },
           "Deeltraject.heeftParticipatie": [
-            { "@id": "_:Persoon42061467820" },
-            { "@id": "_:Organisatie0410.797.275" }
+            { "@id": "_:Participatie001" },
+            { "@id": "_:Participatie003" }
           ]
         },
         {
@@ -231,8 +231,8 @@
             "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
           },
           "Deeltraject.heeftParticipatie": [
-            { "@id": "_:Persoon42061467820" },
-            { "@id": "_:Organisatie1234.567.891" }
+            { "@id": "_:Participatie001" },
+            { "@id": "_:Participatie002" }
           ]
         }
       ]
