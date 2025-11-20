@@ -1,0 +1,241 @@
+{
+  "@context": [
+    "https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld"
+  ],
+  "@graph": [
+    {
+      "@id": "_:Werkvoorkeuren",
+      "@type": "Werkvoorkeuren",
+      "Werkvoorkeuren.beroep": [
+        {
+          "@type": "Beroepstoestand",
+          "Beroepstoestand.naam": { "@value": "Loodgieter", "@language": "nl" },
+          "Beroepstoestand.voorkeur": {
+            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep"
+          }
+        },
+        {
+          "@type": "Beroepstoestand",
+          "Beroepstoestand.naam": { "@value": "Installateur HVAC", "@language": "nl" },
+          "Beroepstoestand.voorkeur": {
+            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep"
+          }
+        },
+        {
+          "@type": "Beroepstoestand",
+          "Beroepstoestand.naam": { "@value": "Dakwerker", "@language": "nl" },
+          "Beroepstoestand.voorkeur": {
+            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep"
+          }
+        }
+     ]
+    },
+    {
+      "@id": "_:Persoon42061467820Verblijfplaats",
+      "@type": "Adresvoorstelling",
+      "Adresvoorstelling.straatnaam": { "@value": "Over Het Waterstraat", "@language": "nl" },
+      "Adresvoorstelling.huisnummer": { "@value": "12" },
+      "Adresvoorstelling.postcode": { "@value": "3900" },
+      "Adresvoorstelling.gemeentenaam": { "@value": "Overpelt", "@language": "nl" },
+      "Adresvoorstelling.land": { "@value": "België", "@language": "nl" }
+    },
+    {
+      "@id": "_:Persoon42061467820",
+      "@type": "GeregistreerdPersoon",
+      "GeregistreerdPersoon.registratie": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "42061467820",
+          "Identificator.toegekendDoor(String)": "Rijksregister"
+        }
+      ],
+      "GeregistreerdPersoon.werkvoorkeuren": [ { "@id": "_:Werkvoorkeuren" } ],
+      "GeregistreerdPersoon.contactinfo": [
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.telefoon": { "@value": "+32489122334" }
+        },
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.telefoon": { "@value": "+3211988776" }
+        },
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.adres": { "@id": "_:Persoon42061467820Verblijfplaats" }
+        },
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.email": { "@value": "jana.de.hinde@hotmail.com" }
+        }
+      ]
+    },
+    {
+      "@id": "_:PersoonJanVanDenBemiddelinghe",
+      "@type": "Persoon",
+      "Persoon.voornaam": "Jan",
+      "Persoon.achternaam": "Vanden Bemiddelinghe",
+      "Persoon.contactinfo": [
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.telefoon": { "@value": "+3231234567" }
+        },
+        {
+          "@type": "Contactpunt",
+          "Contactpunt.email": { "@value": "jan.vandenbemiddelinghe@vdab.be" }
+        }
+      ]
+    },
+    {
+      "@id": "_:Organisatie2.144.097.205",
+      "@type": "PubliekeOrganisatie",
+      "PubliekeOrganisatie.identificator": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "2.144.097.205",
+          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
+        }
+      ]
+    },
+    {
+      "@id": "_:Organisatie1234.567.891",
+      "@type": "GeregistreerdeOrganisatie",
+      "GeregistreerdeOrganisatie.registratie": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "1234.567.891",
+          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
+        }
+      ]
+    },
+    {
+      "@id": "_:Organisatie0410.797.275",
+      "@type": "GeregistreerdeOrganisatie",
+      "GeregistreerdeOrganisatie.registratie": [
+        {
+          "@type": "Identificator",
+          "Identificator.identificator": "0410.797.275",
+          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
+        }
+      ]
+    },
+    {
+      "@id": "_:Participatie001",
+      "@type": "Participatie",
+      "Participatie.rol": {
+        "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Werkzoekende"
+      },
+      "Participatie.heeftParticipant": { "@id": "_:Persoon42061467820" }
+    },
+    {
+      "@id": "_:Participatie002",
+      "@type": "Participatie",
+      "Participatie.rol": {
+        "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Begeleider"
+      },
+      "Participatie.heeftParticipant": { "@id": "_:JanVanDenBemiddelinghe" }
+    },
+    {
+      "@id": "_:Participatie003",
+      "@type": "Participatie",
+      "Participatie.rol": {
+        "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Bemiddelaar"
+      },
+      "Participatie.heeftParticipant": { "@id": "_:Organisatie2.144.097.205" }
+    },
+    {
+      "@id": "_:DienstverleningActiveringNaarWerk001",
+      "@type": "PubliekeDienstverlening",
+      "PubliekeDienstverlening.heeftVerantwoordelijke": { "@id": "_:Organisatie2.144.097.205" },
+      "PubliekeDienstverlening.finaliteit": {
+        "@id": "https://data.vlaanderen.be/id/concept/FinaliteitType/SociaalOnderzoek"
+      },
+      "PubliekeDienstverlening.naam": {
+        "@value": "Activering naar Werk Jana De Hinde",
+        "@language": "nl"
+      },
+      "PubliekeDienstverlening.gebruikt": [
+        { "@id": "_:Werkvoorkeuren" }
+      ],
+      "PubliekeDienstverlening.produceert": [
+        { "@id": "_:Traject" }
+      ],
+      "PubliekeDienstverlening.heeftParticipatie": [
+        { "@id": "_:Participatie001" },
+        { "@id": "_:Participatie002" },
+        { "@id": "_:Participatie003" }
+      ],
+      "PubliekeDienstverlening.type": {
+        "@id": "https://data.vlaanderen.be/id/concept/PubliekeDienstverleningType/ActiveringNaarWerk"
+      }
+    },
+    {
+      "@id": "_:Traject",
+      "@type": "Activeringstraject",
+      "Activeringstraject.naam": { "@value": "Activeringstraject Jana De Hinde", "@language": "nl" },
+      "Activeringstraject.startdatum": {
+        "@value": "2024-10-15T15:00:00",
+        "@type": "DateTime"
+      },
+      "Activeringstraject.einddatum": {
+        "@value": "2025-09-07T13:00:00",
+        "@type": "DateTime"
+      },
+      "Activeringstraject.status": {
+        "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+      },
+      "Activeringstraject.heeftParticipatie": [
+        { "@id": "_:Participatie001" },
+        { "@id": "_:Participatie002" },
+        { "@id": "_:Participatie003" }
+      ],
+      "Activeringstraject.deeltraject": [
+        {
+          "@id": "_:Deeltraject001",
+          "@type": "Deeltraject",
+          "Deeltraject.naam": { "@value": "Opleiding Installateur HVAC", "@language": "nl" },
+          "Deeltraject.type": {
+            "@id": "https://data.vlaanderen.be/id/concept/Deeltrajecttype/Opleiding"
+          },
+          "Deeltraject.startdatum": {
+            "@value": "2024-11-12T10:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.einddatum": {
+            "@value": "2025-02-07T13:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.status": {
+            "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+          },
+          "Deeltraject.heeftParticipatie": [
+            { "@id": "_:Participatie001" },
+            { "@id": "_:Participatie003" }
+          ]
+        },
+        {
+          "@id": "_:Deeltraject002",
+          "@type": "Deeltraject",
+          "Deeltraject.naam": { "@value": "Oriëntering Loodgieter", "@language": "nl" },
+          "Deeltraject.type": {
+            "@id": "https://data.vlaanderen.be/id/concept/Deeltrajecttype/Orientering"
+          },
+          "Deeltraject.startdatum": {
+            "@value": "2025-03-01T09:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.einddatum": {
+            "@value": "2025-03-01T15:00:00",
+            "@type": "DateTime"
+          },
+          "Deeltraject.status": {
+            "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+          },
+          "Deeltraject.heeftParticipatie": [
+            { "@id": "_:Participatie001" },
+            { "@id": "_:Participatie002" }
+          ]
+        }
+      ]
+    }
+  ]
+}
