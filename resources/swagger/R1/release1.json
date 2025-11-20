@@ -132,7 +132,7 @@
       "Participatie.rol": {
         "@id": "https://data.vlaanderen.be/id/concept/Participatietype/Begeleider"
       },
-      "Participatie.heeftParticipant": { "@id": "_:JanVanDenBemiddelinghe" }
+      "Participatie.heeftParticipant": { "@id": "_:PersoonJanVanDenBemiddelinghe" }
     },
     {
       "@id": "_:Participatie003",
