@@ -5,7 +5,7 @@ info:
     KlantVolgSysteem 1.0 uitwisseling tussen VDAB en OCMWs via MAGDA.
     Deze Swagger beschrijft de API voor Release 1.
     Zonder post.
-  version: 1.0.2
+  version: 1.0.3
 externalDocs:
   description: Contacteer MAGDA via de Servicedesk
   url: https://vlaamseoverheid.atlassian.net/servicedesk/customer/portal/9/group/125/create/471

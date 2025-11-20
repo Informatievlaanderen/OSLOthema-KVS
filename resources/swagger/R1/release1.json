@@ -181,7 +181,7 @@
         "@type": "DateTime"
       },
       "Activeringstraject.status": {
-        "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+        "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd"
       },
       "Activeringstraject.heeftParticipatie": [
         { "@id": "_:Participatie001" },
@@ -205,7 +205,7 @@
             "@type": "DateTime"
           },
           "Deeltraject.status": {
-            "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+            "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd"
           },
           "Deeltraject.heeftParticipatie": [
             { "@id": "_:Participatie001" },
@@ -228,7 +228,7 @@
             "@type": "DateTime"
           },
           "Deeltraject.status": {
-            "@id": "https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd"
+            "@id": "https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd"
           },
           "Deeltraject.heeftParticipatie": [
             { "@id": "_:Participatie001" },
