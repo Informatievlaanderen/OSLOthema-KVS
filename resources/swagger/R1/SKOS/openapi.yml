@@ -222,7 +222,7 @@ components:
                     type: string
                     description: 'URI for W3C SKOS vocabulary'
                     format: uri
-                    enum: ['http://www.w3.org/2004/02/SKOS/core#']
+                    enum: ['http://www.w3.org/2004/02/skos/core#']
         # JSON-LD @graph contains the data objects which is an array with a specific list of possible objects.
         # "@graph": [
         #  ...
