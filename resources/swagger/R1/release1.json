@@ -11,21 +11,21 @@
           "@type": "Beroepstoestand",
           "Beroepstoestand.naam": { "@value": "Loodgieter", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
-            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep"
+            "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep"
           }
         },
         {
           "@type": "Beroepstoestand",
           "Beroepstoestand.naam": { "@value": "Installateur HVAC", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
-            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep"
+            "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep"
           }
         },
         {
           "@type": "Beroepstoestand",
           "Beroepstoestand.naam": { "@value": "Dakwerker", "@language": "nl" },
           "Beroepstoestand.voorkeur": {
-            "@id": "http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep"
+            "@id": "https://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep"
           }
         }
      ]
