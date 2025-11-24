@@ -56,9 +56,6 @@ paths:
                 Dienstverlening001:
                   summary: 'Referenties met Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
-                Dienstverlening002:
-                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
-                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release2.json
             application/json:
               schema:
                 $ref: "#/components/schemas/JsonLdRoot"
@@ -66,9 +63,6 @@ paths:
                 Dienstverlening001:
                   summary: 'Referenties met Publieke Dienstverlening Activering Naar Werk.'
                   externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release1.json
-                Dienstverlening002:
-                  summary: 'Publieke Dienstverlening Activering Naar Werk.'
-                  externalValue: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-KVS/refs/heads/main/resources/swagger/R1/release2.json
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
