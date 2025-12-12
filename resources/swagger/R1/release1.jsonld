@@ -97,28 +97,6 @@
       ]
     },
     {
-      "@id": "_:Organisatie1234.567.891",
-      "@type": "GeregistreerdeOrganisatie",
-      "GeregistreerdeOrganisatie.registratie": [
-        {
-          "@type": "Identificator",
-          "Identificator.identificator": "1234.567.891",
-          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
-        }
-      ]
-    },
-    {
-      "@id": "_:Organisatie0410.797.275",
-      "@type": "GeregistreerdeOrganisatie",
-      "GeregistreerdeOrganisatie.registratie": [
-        {
-          "@type": "Identificator",
-          "Identificator.identificator": "0410.797.275",
-          "Identificator.toegekendDoor(String)": "Kruispuntbank van Ondernemingen"
-        }
-      ]
-    },
-    {
       "@id": "_:Participatie001",
       "@type": "Participatie",
       "Participatie.rol": {
