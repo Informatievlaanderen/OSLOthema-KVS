@@ -1,21 +1,24 @@
-openapi: 3.0.4
+openapi: 3.0.3
 info:
-  title: KlantVolgSysteem Release 1
+  title: werk.klantvolgsysteem dienstverleningen Service
   description: |-
     KlantVolgSysteem 1.0 uitwisseling tussen VDAB en OCMWs via MAGDA.
     Deze Swagger beschrijft de API voor Release 1.
     Zonder post.
-  version: 1.0.4
-externalDocs:
-  description: Contacteer MAGDA via de Servicedesk
-  url: https://vlaamseoverheid.atlassian.net/servicedesk/customer/portal/9/group/125/create/471
+  contact:
+    name: werk.klantvolgsysteemAPI
+    email: helpdesk.magda@vlaanderen.be
+  license:
+    name: werk.klantvolgsysteemAPI
+    url: 'https://overheid.vlaanderen.be/magda'
+  version: '1.0.4'
 servers:
-  - url: https://magda.vlaanderen.be
+  - url: /api/v1/werk
 tags:
   - name: Dienstverlening
     description: 'De dienstverlening die men verleent aan Personen vanuit de Organisatie, bijvoorbeeld: activering van naar werk van een werkzoekende door de begeleider van de VDAB.'
 paths:
-  /v1/dienstverleningen:
+  /klantvolgsysteem/dienstverleningen:
     get:
       tags:
         - Dienstverlening
@@ -23,18 +26,17 @@ paths:
       description: Vraag alle informatie op over een Dienstverlening tussen Organisaties en Personen zoals een Activeringstraject van een Werkzoekende door de Organisatie VDAB. Iedere Dienstverlening tussen Organisatie - Personen heeft zijn eigen ID.
       operationId: getService
       parameters:
-        - name: X-Correlation-Id
+        - name: x-correlation-id
           in: header
           description: 'Random UUID om het request te identificeren.'
           required: true
           schema:
-            type: string
-            format: uuid
+            $ref: '#/components/schemas/Correlation-Id'
           examples:
             RandomUUID:
               value: '568ff498-e468-4ca9-9633-2e2473bd8904'
               summary: 'Random UUID value'
-        - name: X-INSZ
+        - name: x-insz
           in: header
           description: 'INSZ code van de Werkzoekende.'
           required: true
@@ -44,7 +46,7 @@ paths:
           examples:
             JanaDeHinde:
               value: '42061467820'
-              summary: 'INSZ nummer Jana De Hinde. Dit is een voorbeeld uit de mocking data.'
+              summary: 'INSZ nummer Jana De Hinde. Dit is een fictief voorbeeld uit de mocking data.'
       responses:
         '200':
           description: Opvraging succesvol.
@@ -81,13 +83,6 @@ paths:
           $ref: '#/components/responses/GatewayTimeout'
 
 components:
-  parameters:
-    CorrelationId:
-      name: x-correlation-id
-      in: header
-      required: true
-      schema:
-        $ref: '#/components/schemas/Correlation-Id'
   responses:
     #HTTP Status 400
     BadRequest:
@@ -156,9 +151,7 @@ components:
     Correlation-Id:
       description: "ID of the transaction. Use this ID for log tracing and incident handling"
       type: string
-      minLength: 10
-      maxLength: 36
-
+      format: uuid
     ErrorMessage:
       required:
         - detail
@@ -196,11 +189,10 @@ components:
           type: array
           description: "JSON-LD's context which defines how the JSON-LD keys are mapped to URIs."
           items:
-            anyOf:
-              - type: string
-                format: uri
-                description: "JSON-LD's external contexts as URIs."
-                enum: ['https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld']
+            type: string
+            format: uri
+            description: "JSON-LD's external contexts as URIs."
+            enum: ['https://data.vlaanderen.be/doc/implementatiemodel/klantvolgsysteem1/ontwerpstandaard/2025-11-04/context/KVS-R1.jsonld']
         # JSON-LD @graph contains the data objects which is an array with a specific list of possible objects.
         # "@graph": [
         #  ...
@@ -221,6 +213,21 @@ components:
               - $ref: "#/components/schemas/Verblijfplaats"
               - $ref: "#/components/schemas/Domicilie"
               - $ref: "#/components/schemas/Adresvoorstelling"
+            discriminator:
+              propertyName: '@type'
+              mapping:
+                Werkvoorkeuren: '#/components/schemas/Werkvoorkeuren'
+                GeregistreerdPersoon: '#/components/schemas/GeregistreerdPersoon'
+                Persoon: '#/components/schemas/Persoon'
+                PubliekeOrganisatie: '#/components/schemas/PubliekeOrganisatie'
+                GeregistreerdeOrganisatie: '#/components/schemas/GeregistreerdeOrganisatie'
+                Participatie: '#/components/schemas/Participatie'
+                PubliekeDienstverlening: '#/components/schemas/PubliekeDienstverlening'
+                Activeringstraject: '#/components/schemas/Activeringstraject'
+                Deeltraject: '#/components/schemas/Deeltraject'
+                Verblijfplaats: '#/components/schemas/Verblijfplaats'
+                Domicilie: '#/components/schemas/Domicilie'
+                Adresvoorstelling: '#/components/schemas/Adresvoorstelling'
           minItems: 0
       required:
         - '@context'
@@ -256,10 +263,10 @@ components:
               type: string
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Voorkeurtype enum value URI.'
               format: uri
-              enum: ['http://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep',
-                     'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep',
-                     'http://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep',
-                     'http://data.vlaanderen.be/id/concept/Voorkeurtype/TeLerenBeroep']
+              enum: ['https://data.vlaanderen.be/id/concept/Voorkeurtype/UitgeslotenBeroep',
+                     'https://data.vlaanderen.be/id/concept/Voorkeurtype/TeVerkennenBeroep',
+                     'https://data.vlaanderen.be/id/concept/Voorkeurtype/GewenstBeroep',
+                     'https://data.vlaanderen.be/id/concept/Voorkeurtype/TeLerenBeroep']
           required:
             - '@id'
       required:
@@ -275,7 +282,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Werkvoorkeuren']
         Werkvoorkeuren.beroep:
           type: array
           description: "Voorkeuren voor bepaalde beroepen."
@@ -313,7 +319,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Adresvoorstelling']
         Adresvoorstelling.straatnaam:
           type: object
           description: 'Straatnaam van het adres.'
@@ -425,7 +430,7 @@ components:
           type: object
           description: 'Adres dat men kan aanschrijven of bezoeken.'
           properties:
-             '@id':
+            '@id':
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to an Adresvoorstelling instance.'
               type: string
           required:
@@ -449,16 +454,17 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Verblijfplaats']
         Verblijfplaats.verblijfsadres:
           type: object
           description: 'Adres dat men kan aanschrijven of bezoeken.'
           properties:
-             '@id':
+            '@id':
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to an Adresvoorstelling instance.'
               type: string
           required:
             - '@id'
+      required:
+        - '@type'
 
     Domicilie:
       type: object
@@ -467,16 +473,17 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Domicilie']
         Verblijfplaats.verblijfsadres:
           type: object
           description: 'Adres dat men kan aanschrijven of bezoeken.'
           properties:
-             '@id':
+            '@id':
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to an Adresvoorstelling instance.'
               type: string
           required:
             - '@id'
+      required:
+        - '@type'
 
     Inwonerschap:
       type: object
@@ -491,6 +498,11 @@ components:
           oneOf:
             - $ref: '#/components/schemas/Verblijfplaats'
             - $ref: '#/components/schemas/Domicilie'
+          discriminator:
+            propertyName: '@type'
+            mapping:
+              Verblijfplaats: '#/components/schemas/Verblijfplaats'
+              Domicilie: '#/components/schemas/Domicilie'
 
     GeregistreerdPersoon:
       type: object
@@ -502,7 +514,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['GeregistreerdPersoon']
         GeregistreerdPersoon.registratie:
           description: 'Identificatiecode van de persoon in het register.'
           type: array
@@ -554,7 +565,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Persoon']
         Persoon.voornaam:
           type: string
           description: 'Naam die een Persoon bij geboorte wordt gegeven. Onderscheidt de Persoon van de andere personen in de familie.'
@@ -587,7 +597,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['PubliekeOrganisatie']
         PubliekeOrganisatie.voorkeursnaam:
           type: object
           description: 'Naam waarmee de Organisatie bij voorkeur wordt aangeduid.'
@@ -641,7 +650,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['GeregistreerdeOrganisatie']
         GeregistreerdeOrganisatie.voorkeursnaam:
           type: object
           description: 'Naam waarmee de Organisatie bij voorkeur wordt aangeduid'
@@ -694,7 +702,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Participatie']
         Participatie.rol:
           type: object
           description: 'De functie van de Agent bij het deelnemen.'
@@ -717,7 +724,7 @@ components:
               type: string
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Participatie instance.'
           required:
-              - '@id'
+            - '@id'
       required:
         - '@id'
         - '@type'
@@ -732,7 +739,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['PubliekeDienstverlening']
         PubliekeDienstverlening.naam:
           type: object
           description: 'De naam van de Publieke Dienstverlening.'
@@ -748,7 +754,7 @@ components:
           type: object
           description: 'De Publieke Organisatie die verantwoordelijk is voor de Publieke Dienstverlening.'
           properties:
-             '@id':
+            '@id':
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a Publieke Organisatie instance.'
               type: string
           required:
@@ -828,7 +834,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Activeringstraject']
         Activeringstraject.naam:
           type: object
           description: 'De naam van een Traject.'
@@ -880,10 +885,10 @@ components:
               type: string
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a TrajectStatus enum value URI.'
               format: uri
-              enum: ['https://data.vlaanderen.be/id/concept/TrajectStatus/Actief',
-                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
-                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Passief',
-                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd']
+              enum: ['https://data.vlaanderen.be/id/concept/Trajectstatustype/Actief',
+                     'https://data.vlaanderen.be/id/concept/Trajectstatustype/Stopgezet',
+                     'https://data.vlaanderen.be/id/concept/Trajectstatustype/Passief',
+                     'https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd']
           required:
             - '@id'
         Activeringstraject.deeltraject:
@@ -917,7 +922,6 @@ components:
         '@type':
           type: string
           description: "Object type."
-          enum: ['Deeltraject']
         Deeltraject.naam:
           type: object
           description: 'De naam van een Deeltraject.'
@@ -981,10 +985,10 @@ components:
               type: string
               description: 'Object ID. Can be an URI or internal reference such as _:MyID. Must point to a TrajectStatus enum value URI.'
               format: uri
-              enum: ['https://data.vlaanderen.be/id/concept/TrajectStatus/Actief',
-                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Stopgezet',
-                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Passief',
-                     'https://data.vlaanderen.be/id/concept/TrajectStatus/Uitgevoerd']
+              enum: ['https://data.vlaanderen.be/id/concept/Trajectstatustype/Actief',
+                     'https://data.vlaanderen.be/id/concept/Trajectstatustype/Stopgezet',
+                     'https://data.vlaanderen.be/id/concept/Trajectstatustype/Passief',
+                     'https://data.vlaanderen.be/id/concept/Trajectstatustype/Uitgevoerd']
           required:
             - '@id'
         Deeltraject.heeftParticipatie:
